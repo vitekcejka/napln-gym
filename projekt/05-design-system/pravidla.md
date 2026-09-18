@@ -25,6 +25,13 @@ Poměr zůstává přibližně 70 % světlá, 25 % černá, 5 % lime. Lime se po
 - Velikosti používají `clamp()`, aby reagovaly plynule bez překryvů.
 - Řádky odstavců mají maximální délku přibližně 65 znaků.
 
+## Logo
+
+- Primární lockup obsahuje symbol a text „Naplň Gym“ v jednom nedělitelném assetu.
+- Na světlých plochách se používá transparentní `napln-gym-logo.png`; symbol ani text se samostatně nepřekreslují.
+- Samostatný dodaný symbol se používá jako favicon.
+- Pro tmavé plochy je potřeba samostatná inverzní varianta; běžná černá verze se na černé pozadí nepokládá.
+
 ## Geometrie
 
 - Malé karty: radius 12–16 px.
@@ -58,4 +65,3 @@ Poměr zůstává přibližně 70 % světlá, 25 % černá, 5 % lime. Lime se po
 - generické SaaS karty a velké stíny;
 - několik konkurenčních akcentních barev;
 - motion na každé maličkosti.
-

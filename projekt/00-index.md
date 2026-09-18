@@ -12,6 +12,7 @@
 | Technické zadání | `06-technika/technicke-zadani.md` | implementováno |
 | Rozhodnutí a změny | `07-rozhodnuti/denik-rozhodnuti.md` | aktivní |
 | Dodané materiály | `08-podklady/README.md` | čeká na podklady |
+| Roadmapa postupného polish passu | `09-review/roadmapa-polish.md` | aktivní |
 
 ## Pravidlo schvalování
 

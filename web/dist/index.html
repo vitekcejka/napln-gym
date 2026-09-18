@@ -22,7 +22,13 @@
       content="Systém pro fitness centra, který hledá a opravuje místa, kde vám utíkají noví členové."
     />
     <title>Naplň Gym — více platících členů pro váš gym</title>
-    <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
+    <link
+      rel="icon"
+      href="assets/favicon.png"
+      type="image/png"
+      sizes="1254x1254"
+    />
+    <link rel="apple-touch-icon" href="assets/favicon.png" />
     <link rel="stylesheet" href="assets/css/styles.css" />
     <script src="assets/js/config.js" defer></script>
     <script src="assets/js/script.js" defer></script>
@@ -31,6 +37,16 @@
     <a class="skip-link" href="#main">Přeskočit na obsah</a>
 
     <header class="site-header" data-header>
+      <div class="announcement-bar" data-announcement-bar>
+        <a href="#pilot" data-scroll-to="pilot">
+          <span
+            >Aktuálně hledáme pilotní gym, se kterým to postavíme od
+            podlahy.</span
+          >
+          <strong>Zjistit víc</strong>
+        </a>
+      </div>
+
       <div class="nav-shell">
         <a
           class="brand"
@@ -38,18 +54,15 @@
           aria-label="Naplň Gym — na začátek stránky"
           data-scroll-to="top"
         >
-          <svg class="brand__mark" viewBox="0 0 46 34" aria-hidden="true">
-            <path
-              class="brand__bar"
-              d="M2 22h10v10H2zM18 14h10v18H18zM34 2h10v30H34z"
-            />
-            <path
-              class="brand__route"
-              d="M5 27h8c5 0 4-8 9-8h7c5 0 4-9 9-9h4"
-            />
-            <path class="brand__arrow" d="m38 6 5 4-5 4" />
-          </svg>
-          <span class="brand__word">Naplň Gym</span>
+          <img
+            class="brand__logo"
+            src="assets/napln-gym-logo.png"
+            alt=""
+            width="1699"
+            height="926"
+            decoding="async"
+            fetchpriority="high"
+          />
         </a>
 
         <nav class="desktop-nav" aria-label="Hlavní navigace">
@@ -104,9 +117,9 @@
             </div>
 
             <h1 id="hero-title" data-hero-item>
-              Váš gym má místo pro
-              <span class="headline-highlight">víc členů.</span>
-              <span>Pojďme ho naplnit.</span>
+              <span>Prázdný gym</span>
+              <span class="headline-highlight">nevydělává.</span>
+              <span class="hero-title__closing">Pojďme ho naplnit.</span>
             </h1>
 
             <p class="hero__lead" data-hero-item>
@@ -205,10 +218,30 @@
 
         <div class="hero__ticker" aria-hidden="true">
           <div class="hero__ticker-track">
-            <span>VÍC PLATÍCÍCH ČLENŮ</span><i>✦</i
-            ><span>MÉNĚ PRÁZDNÉ KAPACITY</span><i>✦</i>
-            <span>VÍC PLATÍCÍCH ČLENŮ</span><i>✦</i
-            ><span>MÉNĚ PRÁZDNÉ KAPACITY</span><i>✦</i>
+            <div class="hero__ticker-group">
+              <span>VÍC PLATÍCÍCH ČLENŮ</span><i>✦</i>
+              <span>MÉNĚ PRÁZDNÉ KAPACITY</span><i>✦</i>
+              <span>VÍC PLATÍCÍCH ČLENŮ</span><i>✦</i>
+              <span>MÉNĚ PRÁZDNÉ KAPACITY</span><i>✦</i>
+            </div>
+            <div class="hero__ticker-group">
+              <span>VÍC PLATÍCÍCH ČLENŮ</span><i>✦</i>
+              <span>MÉNĚ PRÁZDNÉ KAPACITY</span><i>✦</i>
+              <span>VÍC PLATÍCÍCH ČLENŮ</span><i>✦</i>
+              <span>MÉNĚ PRÁZDNÉ KAPACITY</span><i>✦</i>
+            </div>
+            <div class="hero__ticker-group">
+              <span>VÍC PLATÍCÍCH ČLENŮ</span><i>✦</i>
+              <span>MÉNĚ PRÁZDNÉ KAPACITY</span><i>✦</i>
+              <span>VÍC PLATÍCÍCH ČLENŮ</span><i>✦</i>
+              <span>MÉNĚ PRÁZDNÉ KAPACITY</span><i>✦</i>
+            </div>
+            <div class="hero__ticker-group">
+              <span>VÍC PLATÍCÍCH ČLENŮ</span><i>✦</i>
+              <span>MÉNĚ PRÁZDNÉ KAPACITY</span><i>✦</i>
+              <span>VÍC PLATÍCÍCH ČLENŮ</span><i>✦</i>
+              <span>MÉNĚ PRÁZDNÉ KAPACITY</span><i>✦</i>
+            </div>
           </div>
         </div>
       </section>

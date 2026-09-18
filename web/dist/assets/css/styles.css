@@ -12,6 +12,7 @@
   --font-body: Inter, "Segoe UI", Helvetica, Arial, sans-serif;
   --shell: min(1240px, calc(100vw - 40px));
   --header-height: 78px;
+  --announcement-height: 34px;
   --radius-sm: 12px;
   --radius-md: 18px;
   --radius-lg: 28px;
@@ -102,7 +103,8 @@ a {
   position: fixed;
   z-index: 100;
   inset: 0 0 auto;
-  height: var(--header-height);
+  height: calc(var(--header-height) + var(--announcement-height));
+  overflow: hidden;
   border-bottom: 1px solid transparent;
   transition:
     background 220ms ease,
@@ -111,19 +113,60 @@ a {
 }
 
 .site-header.is-scrolled {
+  height: var(--header-height);
   background: rgba(245, 246, 240, 0.9);
   border-color: var(--line);
   backdrop-filter: blur(16px);
 }
 
-.nav-shell {
+.announcement-bar {
+  height: var(--announcement-height);
+  color: var(--ink);
+  background: var(--lime);
+  transition:
+    transform 360ms var(--ease),
+    opacity 220ms ease;
+}
+
+.announcement-bar a {
   width: var(--shell);
   height: 100%;
+  margin-inline: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.78rem;
+  font-weight: 750;
+  letter-spacing: 0.01em;
+  line-height: 1;
+}
+
+.announcement-bar strong {
+  font-weight: 850;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+}
+
+.site-header.is-scrolled .announcement-bar {
+  opacity: 0;
+  transform: translateY(-100%);
+}
+
+.nav-shell {
+  width: var(--shell);
+  height: var(--header-height);
   margin-inline: auto;
   display: grid;
   grid-template-columns: 1fr auto 1fr;
   align-items: center;
   gap: 30px;
+  transition: transform 360ms var(--ease);
+}
+
+.site-header.is-scrolled .nav-shell {
+  transform: translateY(calc(0px - var(--announcement-height)));
 }
 
 .brand {
@@ -131,6 +174,19 @@ a {
   align-items: center;
   gap: 11px;
   width: max-content;
+}
+
+.brand__logo {
+  width: auto;
+  height: 64px;
+  display: block;
+}
+
+@media (min-width: 1021px) {
+  .site-header .brand__logo {
+    height: 73.6px;
+    transform: translateY(3px);
+  }
 }
 
 .brand__mark {
@@ -258,7 +314,9 @@ a {
   position: relative;
   overflow: hidden;
   min-height: 100svh;
-  padding-top: calc(var(--header-height) + clamp(50px, 8vh, 95px));
+  padding-top: calc(
+    var(--header-height) + var(--announcement-height) + clamp(50px, 8vh, 95px)
+  );
   background: var(--canvas);
 }
 
@@ -314,16 +372,30 @@ a {
   max-width: 860px;
   margin: 27px 0 24px;
   font-family: var(--font-display);
-  font-size: clamp(3.6rem, 7.4vw, 7.2rem);
+  font-size: clamp(3.2rem, 4vw, 3.65rem);
   font-weight: 900;
-  letter-spacing: -0.075em;
-  line-height: 0.86;
+  letter-spacing: -0.06em;
+  line-height: 0.9;
   text-wrap: balance;
   text-transform: uppercase;
 }
 
 .hero h1 > span {
   display: block;
+}
+
+@media (min-width: 1021px) {
+  .hero h1 > span {
+    width: max-content;
+    max-width: 100%;
+    white-space: nowrap;
+  }
+
+  .hero-title__closing {
+    margin-top: 0.06em;
+    font-size: 0.8em;
+    letter-spacing: -0.045em;
+  }
 }
 
 .headline-highlight {
@@ -536,7 +608,6 @@ a {
   border-block: 1px solid var(--ink);
   color: var(--ink);
   background: var(--lime);
-  transform: rotate(-0.7deg) scale(1.02);
 }
 
 .hero__ticker-track {
@@ -544,13 +615,21 @@ a {
   min-height: 48px;
   display: flex;
   align-items: center;
-  gap: 30px;
   font-family: var(--font-display);
   font-size: 0.86rem;
   font-weight: 900;
   letter-spacing: 0.08em;
   text-transform: uppercase;
   animation: ticker 22s linear infinite;
+  will-change: transform;
+}
+
+.hero__ticker-group {
+  padding-right: 30px;
+  display: flex;
+  flex: 0 0 auto;
+  align-items: center;
+  gap: 30px;
 }
 
 .hero__ticker-track i {
@@ -1822,7 +1901,7 @@ details[open] .faq-icon {
 
 @keyframes ticker {
   to {
-    transform: translateX(-50%);
+    transform: translate3d(-25%, 0, 0);
   }
 }
 
@@ -1836,8 +1915,19 @@ details[open] .faq-icon {
     display: none;
   }
 
+  .site-header,
+  .site-header.is-scrolled {
+    height: var(--header-height);
+  }
+
+  .announcement-bar {
+    display: none;
+  }
+
   .nav-shell {
+    height: 100%;
     grid-template-columns: 1fr auto;
+    transform: none !important;
   }
 
   .menu-toggle {
@@ -2059,6 +2149,10 @@ details[open] .faq-icon {
 
   .brand__mark {
     width: 34px;
+  }
+
+  .brand__logo {
+    height: 56px;
   }
 
   .brand__word {

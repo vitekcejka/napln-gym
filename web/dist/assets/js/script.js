@@ -44,7 +44,7 @@
   });
 
   const syncHeader = () => {
-    header?.classList.toggle("is-scrolled", window.scrollY > 16);
+    header?.classList.toggle("is-scrolled", window.scrollY > 34);
   };
 
   syncHeader();
