@@ -178,6 +178,8 @@
   const memberLayer = memberEntry?.querySelector("[data-member-layer]");
   if (memberEntry && memberLayer) {
     const svgNamespace = "http://www.w3.org/2000/svg";
+    let arrivalStartTimer = 0;
+    let arrivalEndTimer = 0;
 
     const createSvgElement = (name, attributes = {}) => {
       const element = document.createElementNS(svgNamespace, name);
@@ -187,48 +189,18 @@
       return element;
     };
 
-    const cubicPoint = (start, controlA, controlB, end, progress) => {
-      const inverse = 1 - progress;
-      return {
-        x:
-          inverse ** 3 * start.x +
-          3 * inverse ** 2 * progress * controlA.x +
-          3 * inverse * progress ** 2 * controlB.x +
-          progress ** 3 * end.x,
-        y:
-          inverse ** 3 * start.y +
-          3 * inverse ** 2 * progress * controlA.y +
-          3 * inverse * progress ** 2 * controlB.y +
-          progress ** 3 * end.y,
-      };
-    };
-
     const routePosition = (progress) => {
-      if (progress <= 0.78) {
-        return cubicPoint(
-          { x: 300, y: 828 },
-          { x: 430, y: 828 },
-          { x: 585, y: 770 },
-          { x: 674, y: 642 },
-          progress / 0.78,
-        );
-      }
-
-      const doorwayProgress = (progress - 0.78) / 0.22;
-      return cubicPoint(
-        { x: 674, y: 642 },
-        { x: 688, y: 615 },
-        { x: 706, y: 570 },
-        { x: 718, y: 530 },
-        doorwayProgress,
-      );
+      return {
+        x: 426.5 + 307 * progress,
+        y: 853 - 188.5 * progress,
+      };
     };
 
     memberEntry.addEventListener("click", () => {
       const trail = createSvgElement("g", {
         class: "hero-logo__trail",
       });
-      const stops = [0.03, 0.14, 0.25, 0.36, 0.48, 0.6, 0.71, 0.81, 0.91];
+      const stops = [0.04, 0.16, 0.28, 0.4, 0.52, 0.64, 0.76, 0.88, 0.985];
 
       stops.forEach((progress, index) => {
         const position = routePosition(progress);
@@ -270,6 +242,17 @@
       });
 
       memberLayer.appendChild(trail);
+      window.clearTimeout(arrivalStartTimer);
+      window.clearTimeout(arrivalEndTimer);
+      memberEntry.classList.remove("is-arriving");
+      arrivalStartTimer = window.setTimeout(() => {
+        void memberEntry.offsetWidth;
+        memberEntry.classList.add("is-arriving");
+      }, 840);
+      arrivalEndTimer = window.setTimeout(
+        () => memberEntry.classList.remove("is-arriving"),
+        1540,
+      );
       window.setTimeout(() => trail.remove(), 1900);
     });
   }

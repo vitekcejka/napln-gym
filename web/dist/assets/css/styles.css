@@ -546,6 +546,37 @@ a {
   pointer-events: none;
 }
 
+.hero-logo__arrival-signal {
+  pointer-events: none;
+}
+
+.hero-logo__arrival-glow,
+.hero-logo__arrival-ring {
+  fill: none;
+  opacity: 0;
+  transform-box: fill-box;
+  transform-origin: center;
+}
+
+.hero-logo__arrival-glow {
+  stroke: var(--lime);
+  stroke-width: 26;
+  filter: blur(11px);
+}
+
+.hero-logo__arrival-ring {
+  stroke: var(--lime);
+  stroke-width: 4;
+}
+
+.hero-visual.is-arriving .hero-logo__arrival-glow {
+  animation: arrival-halo 680ms var(--ease);
+}
+
+.hero-visual.is-arriving .hero-logo__arrival-ring {
+  animation: arrival-ring 680ms var(--ease);
+}
+
 .hero-logo__trail,
 .hero-logo__footprint-position {
   pointer-events: none;
@@ -1937,6 +1968,34 @@ details[open] .faq-icon {
   to {
     opacity: 0;
     transform: scale(0.72);
+  }
+}
+
+@keyframes arrival-halo {
+  0%,
+  100% {
+    opacity: 0;
+    transform: scale(0.72);
+  }
+  42% {
+    opacity: 0.95;
+    transform: scale(1.16);
+  }
+}
+
+@keyframes arrival-ring {
+  0%,
+  100% {
+    opacity: 0;
+    transform: scale(0.78);
+  }
+  38% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  72% {
+    opacity: 0.45;
+    transform: scale(1.22);
   }
 }
 
