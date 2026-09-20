@@ -35,7 +35,7 @@
 
 | # | Sekce | Co budeme řešit | Stav |
 |---:|---|---|---|
-| MOB-1 | Navigace a header | Výška, menu, dotykové plochy, focus a zavírání navigace | ⬜ |
+| MOB-1 | Navigace a header | Výška, menu, dotykové plochy, focus a zavírání navigace | 🟨 |
 | MOB-2 | Hero | Samostatná mobilní kompozice, headline, CTA a délka první obrazovky | ⬜ |
 | MOB-3 | Sedm úniků | Čitelný mobilní příběh místo zmenšeného desktopového diagramu | ⬜ |
 | MOB-4 | Jak to funguje | Rychlé skenování čtyř kroků a menší vertikální délka | ⬜ |
@@ -77,4 +77,6 @@
 
 ## Aktuální krok
 
-**Další na řadě:** PC-3 · Sedm úniků.
+**Aktuální priorita:** MOB-1 · Navigace a header.
+
+**PC pozastaveno po:** PC-2 · Hero. Při návratu pokračovat od PC-3 · Sedm úniků.
