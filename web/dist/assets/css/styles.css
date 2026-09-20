@@ -372,10 +372,10 @@ a {
   max-width: 860px;
   margin: 27px 0 24px;
   font-family: var(--font-display);
-  font-size: clamp(3.2rem, 4vw, 3.65rem);
+  font-size: clamp(3rem, 3.8vw, 3.45rem);
   font-weight: 900;
-  letter-spacing: -0.06em;
-  line-height: 0.9;
+  letter-spacing: -0.02em;
+  line-height: 1.08;
   text-wrap: balance;
   text-transform: uppercase;
 }
@@ -391,16 +391,21 @@ a {
     white-space: nowrap;
   }
 
+  .hero h1 > span + span {
+    margin-top: 0.04em;
+  }
+
   .hero-title__closing {
-    margin-top: 0.06em;
-    font-size: 0.8em;
-    letter-spacing: -0.045em;
+    margin-top: 0.16em;
+    font-size: 0.78em;
+    letter-spacing: -0.01em;
   }
 }
 
 .headline-highlight {
   position: relative;
   z-index: 0;
+  isolation: isolate;
   width: max-content;
   max-width: 100%;
 }
@@ -410,13 +415,22 @@ a {
   position: absolute;
   z-index: -1;
   right: -0.05em;
-  bottom: 0.02em;
+  bottom: 0.04em;
   left: -0.05em;
-  height: 0.29em;
+  height: 0.24em;
   background: var(--lime);
   transform: scaleX(0);
   transform-origin: left;
   animation: marker-draw 800ms 780ms var(--ease) forwards;
+}
+
+.hero-title__closing .headline-highlight {
+  display: inline-block;
+}
+
+.headline-highlight--secondary::before {
+  height: 0.3em;
+  animation-delay: 980ms;
 }
 
 .hero__lead {
@@ -476,13 +490,14 @@ a {
 
 .hero-visual {
   position: relative;
-  aspect-ratio: 0.98;
+  width: 100%;
+  aspect-ratio: 1.08;
   max-width: 570px;
   padding: 22px;
   justify-self: end;
   display: grid;
   grid-template-rows: auto minmax(0, 1fr) auto;
-  gap: 14px;
+  gap: 16px;
   border: 1px solid var(--line-strong);
   border-radius: var(--radius-lg);
   overflow: hidden;
@@ -491,8 +506,8 @@ a {
     linear-gradient(rgba(11, 13, 12, 0.055) 1px, transparent 1px),
     linear-gradient(90deg, rgba(11, 13, 12, 0.055) 1px, transparent 1px);
   background-size: 36px 36px;
-  transform: rotate(1.5deg);
-  box-shadow: 18px 18px 0 var(--ink);
+  transform: rotate(0.8deg);
+  box-shadow: 14px 14px 0 var(--ink);
   opacity: 0;
   animation: visual-in 900ms 180ms var(--ease) forwards;
 }
@@ -509,15 +524,11 @@ a {
   fill: var(--ink);
 }
 
-.hero-visual__door {
-  fill: var(--canvas);
-}
-
 .hero-visual__path,
 .hero-visual__arrow {
   fill: none;
   stroke: var(--lime);
-  stroke-width: 12;
+  stroke-width: 10;
   stroke-linecap: round;
   stroke-linejoin: round;
 }
@@ -564,7 +575,7 @@ a {
   padding: 7px 11px;
   color: var(--surface);
   background: var(--ink);
-  font-size: 0.72rem;
+  font-size: 0.75rem;
   font-weight: 750;
   letter-spacing: 0.06em;
   text-transform: uppercase;
@@ -579,15 +590,14 @@ a {
   position: relative;
   z-index: 2;
   min-width: 0;
-  padding: 10px 12px;
+  padding-top: 12px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 12px;
-  border-radius: 9px;
-  color: var(--surface);
-  background: var(--ink);
-  font-size: 0.72rem;
+  gap: 14px;
+  border-top: 1px solid var(--line-strong);
+  color: var(--ink);
+  font-size: 0.75rem;
   font-weight: 750;
   line-height: 1.25;
   letter-spacing: 0.04em;
@@ -596,7 +606,9 @@ a {
 
 .hero-visual__caption span:first-child {
   flex: 0 0 auto;
-  color: var(--lime);
+  padding: 4px 7px;
+  color: var(--ink);
+  background: var(--lime);
   white-space: nowrap;
 }
 
@@ -2235,11 +2247,11 @@ details[open] .faq-icon {
     padding: 14px;
     gap: 10px;
     box-shadow: 11px 11px 0 var(--ink);
-    transform: rotate(1deg);
+    transform: rotate(0.6deg);
   }
 
   .hero-visual__caption {
-    padding: 9px 10px;
+    padding-top: 9px;
     gap: 8px;
     font-size: 0.62rem;
     letter-spacing: 0.025em;
