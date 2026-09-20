@@ -691,7 +691,7 @@ a {
   gap: 9px;
   border-top: 1px solid var(--line-strong);
   color: var(--ink);
-  font-size: 0.78rem;
+  font-size: 0.88rem;
   font-weight: 800;
   letter-spacing: 0.035em;
   line-height: 1.35;
@@ -2451,7 +2451,7 @@ details[open] .faq-icon {
 
   .hero-visual__hint {
     gap: 7px;
-    font-size: 0.68rem;
+    font-size: 0.74rem;
   }
 
   .hero__ticker-track {
