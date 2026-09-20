@@ -291,7 +291,7 @@
               : memberCount >= 5
                 ? "Začíná se to plnit."
                 : memberCount === 1
-                  ? "člen"
+                  ? "nový člen"
                   : "noví členové";
 
         memberPrompt.hidden = true;
