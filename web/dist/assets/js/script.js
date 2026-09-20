@@ -5,12 +5,14 @@
 
   const header = document.querySelector("[data-header]");
   const toggle = document.querySelector("[data-menu-toggle]");
+  const toggleLabel = toggle?.querySelector(".sr-only");
   const mobileMenu = document.querySelector("[data-mobile-menu]");
   const config = window.NAPLN_GYM_CONFIG || {};
 
   const closeMenu = () => {
     if (!toggle || !mobileMenu) return;
     toggle.setAttribute("aria-expanded", "false");
+    if (toggleLabel) toggleLabel.textContent = "Otevřít navigaci";
     mobileMenu.hidden = true;
     document.body.classList.remove("menu-open");
   };
@@ -19,6 +21,10 @@
     toggle.addEventListener("click", () => {
       const willOpen = toggle.getAttribute("aria-expanded") !== "true";
       toggle.setAttribute("aria-expanded", String(willOpen));
+      if (toggleLabel)
+        toggleLabel.textContent = willOpen
+          ? "Zavřít navigaci"
+          : "Otevřít navigaci";
       mobileMenu.hidden = !willOpen;
       document.body.classList.toggle("menu-open", willOpen);
     });
@@ -331,14 +337,32 @@
   });
 
   const mobileBookingCta = document.querySelector(".mobile-booking-cta");
+  const heroSection = document.getElementById("top");
   const bookingSection = document.getElementById("booking");
-  if (mobileBookingCta && bookingSection && "IntersectionObserver" in window) {
-    const bookingObserver = new IntersectionObserver(
-      ([entry]) => {
-        mobileBookingCta.classList.toggle("is-hidden", entry.isIntersecting);
-      },
-      { threshold: 0.12 },
-    );
-    bookingObserver.observe(bookingSection);
+  const footer = document.querySelector(".site-footer");
+  if (mobileBookingCta && heroSection && bookingSection && footer) {
+    let mobileCtaFrame = 0;
+    const elementIsVisible = (element) => {
+      const bounds = element.getBoundingClientRect();
+      return bounds.top < window.innerHeight && bounds.bottom > 0;
+    };
+    const syncMobileBookingCta = () => {
+      mobileCtaFrame = 0;
+      const heroPassed = heroSection.getBoundingClientRect().bottom <= 0;
+      const shouldHide =
+        window.innerWidth > 640 ||
+        !heroPassed ||
+        elementIsVisible(bookingSection) ||
+        elementIsVisible(footer);
+      mobileBookingCta.classList.toggle("is-hidden", shouldHide);
+    };
+    const requestMobileCtaSync = () => {
+      if (mobileCtaFrame) return;
+      mobileCtaFrame = window.requestAnimationFrame(syncMobileBookingCta);
+    };
+
+    syncMobileBookingCta();
+    window.addEventListener("scroll", requestMobileCtaSync, { passive: true });
+    window.addEventListener("resize", requestMobileCtaSync);
   }
 })();

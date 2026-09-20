@@ -36,19 +36,19 @@
 | # | Sekce | Co budeme řešit | Stav |
 |---:|---|---|---|
 | MOB-1 | Navigace a header | Výška, menu, dotykové plochy, focus a zavírání navigace | 🟨 |
-| MOB-2 | Hero | Samostatná mobilní kompozice, headline, CTA a délka první obrazovky | ⬜ |
-| MOB-3 | Sedm úniků | Čitelný mobilní příběh místo zmenšeného desktopového diagramu | ⬜ |
-| MOB-4 | Jak to funguje | Rychlé skenování čtyř kroků a menší vertikální délka | ⬜ |
-| MOB-5 | Pilotní spolupráce | Priorita nabídky, čitelnost bodů a dostupné CTA | ⬜ |
-| MOB-6 | Pro koho | Čtyři podmínky bez velkých karet a zbytečného scrollu | ⬜ |
-| MOB-7 | Founder | Poměr fotografie, pořadí obsahu, čitelnost quote a délka sekce | ⬜ |
-| MOB-8 | FAQ | Velikost řádků, pohodlné ovládání a délka odpovědí | ⬜ |
-| MOB-9 | Booking / hlavní CTA | Embed/fallback, pohodlné ovládání a finální konverzní krok | ⬜ |
-| MOB-10 | Footer | Přirozené rozdělení údajů maximálně do několika krátkých řádků | ⬜ |
-| MOB-11 | Sticky CTA | Zobrazit až po hero, skrýt u bookingu a footeru | ⬜ |
-| MOB-12 | Typografie a spacing | Mobilní type scale, mezery, touch targets a žádný horizontální overflow | ⬜ |
-| MOB-13 | Motion | Lehčí animace, plynulost a respektování reduced motion | ⬜ |
-| MOB-14 | Celý mobilní flow | Celková délka, rychlost průchodu a návaznost sekcí | ⬜ |
+| MOB-2 | Hero | Samostatná mobilní kompozice, headline, CTA a délka první obrazovky | 🟨 |
+| MOB-3 | Sedm úniků | Čitelný mobilní příběh místo zmenšeného desktopového diagramu | 🟨 |
+| MOB-4 | Jak to funguje | Rychlé skenování čtyř kroků a menší vertikální délka | 🟨 |
+| MOB-5 | Pilotní spolupráce | Priorita nabídky, čitelnost bodů a dostupné CTA | 🟨 |
+| MOB-6 | Pro koho | Čtyři podmínky bez velkých karet a zbytečného scrollu | 🟨 |
+| MOB-7 | Founder | Poměr fotografie, pořadí obsahu, čitelnost quote a délka sekce | 🟨 |
+| MOB-8 | FAQ | Velikost řádků, pohodlné ovládání a délka odpovědí | 🟨 |
+| MOB-9 | Booking / hlavní CTA | Embed/fallback, pohodlné ovládání a finální konverzní krok | 🟨 |
+| MOB-10 | Footer | Přirozené rozdělení údajů maximálně do několika krátkých řádků | 🟨 |
+| MOB-11 | Sticky CTA | Zobrazit až po hero, skrýt u bookingu a footeru | 🟨 |
+| MOB-12 | Typografie a spacing | Mobilní type scale, mezery, touch targets a žádný horizontální overflow | 🟨 |
+| MOB-13 | Motion | Lehčí animace, plynulost a respektování reduced motion | 🟨 |
+| MOB-14 | Celý mobilní flow | Celková délka, rychlost průchodu a návaznost sekcí | 🟨 |
 
 ## C. Společné produkční dokončení
 
@@ -77,6 +77,6 @@
 
 ## Aktuální krok
 
-**Aktuální priorita:** MOB-1 · Navigace a header.
+**Aktuální priorita:** celý mobilní první pass je připravený k postupnému review od MOB-1. Všechny mobilní body zůstávají rozpracované, dokud je společně neschválíme.
 
 **PC pozastaveno po:** PC-2 · Hero. Při návratu pokračovat od PC-3 · Sedm úniků.
