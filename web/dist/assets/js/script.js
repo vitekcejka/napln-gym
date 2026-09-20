@@ -245,7 +245,7 @@
         class: "hero-logo__arrival-signal",
         style: "--arrival-delay: 840ms",
       });
-      const doorOutline = "674,331 794,393 794,577 674,634";
+      const doorOutline = "674,331 794,393 794,696 674,634";
       const arrivalGlow = createSvgElement("polygon", {
         class: "hero-logo__arrival-glow",
         points: doorOutline,
