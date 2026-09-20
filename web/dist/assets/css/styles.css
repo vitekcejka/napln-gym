@@ -497,11 +497,15 @@ a {
   justify-self: end;
   display: block;
   appearance: none;
-  border: 0;
-  border-radius: 18%;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius-lg);
   overflow: hidden;
   color: var(--ink);
-  background: transparent;
+  background-color: rgba(255, 255, 255, 0.88);
+  background-image:
+    linear-gradient(rgba(11, 13, 12, 0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(11, 13, 12, 0.035) 1px, transparent 1px);
+  background-size: 36px 36px;
   box-shadow: 14px 14px 0 var(--ink);
   font: inherit;
   text-align: left;
@@ -531,7 +535,7 @@ a {
 
 .hero-logo {
   position: absolute;
-  inset: 0;
+  inset: 7.5% 2.5% 9.5%;
   display: block;
 }
 
@@ -556,21 +560,10 @@ a {
   pointer-events: none;
 }
 
-.hero-logo__arrival-glow {
-  fill: rgba(199, 255, 46, 0.3);
-  filter: blur(16px);
-  opacity: 0;
-  transform-box: fill-box;
-  transform-origin: center;
-}
-
-.hero-visual.is-arriving .hero-logo__arrival-glow {
-  animation: door-arrival 520ms var(--ease);
-}
-
 .hero-logo__member {
   pointer-events: none;
   filter: drop-shadow(0 2px 2px rgba(11, 13, 12, 0.32));
+  will-change: transform, opacity;
 }
 
 .hero-logo__member-head {
@@ -599,9 +592,9 @@ a {
 .hero-visual__topline {
   position: absolute;
   z-index: 3;
-  top: 8.4%;
-  left: 8.4%;
-  right: 8.4%;
+  top: 5.5%;
+  left: 5.5%;
+  right: 5.5%;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -628,9 +621,9 @@ a {
 .hero-visual__hint {
   position: absolute;
   z-index: 3;
-  right: 8.4%;
-  bottom: 8.5%;
-  left: 8.4%;
+  right: 5.5%;
+  bottom: 5.5%;
+  left: 5.5%;
   min-width: 0;
   padding-top: 12px;
   display: grid;
@@ -1951,18 +1944,6 @@ details[open] .faq-icon {
   to {
     opacity: 1;
     transform: translateY(0) rotate(0.6deg) scale(1);
-  }
-}
-
-@keyframes door-arrival {
-  0%,
-  100% {
-    opacity: 0;
-    transform: scale(0.82);
-  }
-  50% {
-    opacity: 0.9;
-    transform: scale(1.08);
   }
 }
 

@@ -179,7 +179,6 @@
   if (memberEntry && memberLayer) {
     const svgNamespace = "http://www.w3.org/2000/svg";
     const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
-    let arrivalTimer = 0;
 
     const createSvgElement = (name, attributes = {}) => {
       const element = document.createElementNS(svgNamespace, name);
@@ -189,23 +188,44 @@
       return element;
     };
 
-    const pulseDoor = () => {
-      window.clearTimeout(arrivalTimer);
-      memberEntry.classList.remove("is-arriving");
-      void memberEntry.offsetWidth;
-      memberEntry.classList.add("is-arriving");
-      arrivalTimer = window.setTimeout(
-        () => memberEntry.classList.remove("is-arriving"),
-        560,
+    const cubicPoint = (start, controlA, controlB, end, progress) => {
+      const inverse = 1 - progress;
+      return {
+        x:
+          inverse ** 3 * start.x +
+          3 * inverse ** 2 * progress * controlA.x +
+          3 * inverse * progress ** 2 * controlB.x +
+          progress ** 3 * end.x,
+        y:
+          inverse ** 3 * start.y +
+          3 * inverse ** 2 * progress * controlA.y +
+          3 * inverse * progress ** 2 * controlB.y +
+          progress ** 3 * end.y,
+      };
+    };
+
+    const memberPosition = (progress) => {
+      if (progress <= 0.78) {
+        return cubicPoint(
+          { x: 310, y: 758 },
+          { x: 430, y: 758 },
+          { x: 565, y: 700 },
+          { x: 660, y: 605 },
+          progress / 0.78,
+        );
+      }
+
+      const doorwayProgress = (progress - 0.78) / 0.22;
+      return cubicPoint(
+        { x: 660, y: 605 },
+        { x: 680, y: 580 },
+        { x: 702, y: 540 },
+        { x: 714, y: 500 },
+        doorwayProgress,
       );
     };
 
     memberEntry.addEventListener("click", () => {
-      if (reducedMotion.matches) {
-        pulseDoor();
-        return;
-      }
-
       const member = createSvgElement("g", {
         class: "hero-logo__member",
         opacity: "1",
@@ -225,28 +245,39 @@
         class: "hero-logo__member-body",
         d: bodyPath,
       });
-      const motion = createSvgElement("animateMotion", {
-        path: "M345 987 C520 987 650 964 742 900 C795 863 818 810 820 724",
-        dur: "1.25s",
-        begin: "0s",
-        fill: "freeze",
-        calcMode: "spline",
-        keyTimes: "0;1",
-        keySplines: "0.22 1 0.36 1",
-      });
-      const fade = createSvgElement("animate", {
-        attributeName: "opacity",
-        values: "1;1;0",
-        keyTimes: "0;0.82;1",
-        dur: "1.25s",
-        begin: "0s",
-        fill: "freeze",
-      });
 
-      member.append(head, outline, body, motion, fade);
+      member.append(head, outline, body);
       memberLayer.appendChild(member);
-      window.setTimeout(pulseDoor, 1020);
-      window.setTimeout(() => member.remove(), 1380);
+
+      const duration = reducedMotion.matches ? 420 : 1450;
+      const startedAt = performance.now();
+
+      const animateMember = (timestamp) => {
+        const elapsed = Math.min((timestamp - startedAt) / duration, 1);
+        const eased =
+          elapsed < 0.5
+            ? 4 * elapsed ** 3
+            : 1 - Math.pow(-2 * elapsed + 2, 3) / 2;
+        const position = memberPosition(reducedMotion.matches ? 1 : eased);
+        const step = reducedMotion.matches
+          ? 0
+          : Math.sin(elapsed * Math.PI * 12) * 2.5;
+        const opacity = elapsed > 0.84 ? Math.max(0, (1 - elapsed) / 0.16) : 1;
+
+        member.setAttribute(
+          "transform",
+          `translate(${position.x} ${position.y + step})`,
+        );
+        member.setAttribute("opacity", String(opacity));
+
+        if (elapsed < 1) {
+          window.requestAnimationFrame(animateMember);
+        } else {
+          member.remove();
+        }
+      };
+
+      window.requestAnimationFrame(animateMember);
     });
   }
 
