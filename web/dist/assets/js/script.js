@@ -213,10 +213,10 @@
       const head = createSvgElement("circle", {
         class: "hero-logo__member-head",
         cx: "0",
-        cy: "-12",
-        r: "7",
+        cy: "-18",
+        r: "11",
       });
-      const bodyPath = "M0 -4v20M-10 5 0 0 10 5M-7 30 0 16 7 30";
+      const bodyPath = "M0 -7v31M-15 7 0 0 15 7M-11 44 0 24 11 44";
       const outline = createSvgElement("path", {
         class: "hero-logo__member-outline",
         d: bodyPath,
@@ -226,7 +226,7 @@
         d: bodyPath,
       });
       const motion = createSvgElement("animateMotion", {
-        path: "M130 410 C230 410 270 397 330 370 C385 345 425 322 470 292",
+        path: "M345 987 C520 987 650 964 742 900 C795 863 818 810 820 724",
         dur: "1.25s",
         begin: "0s",
         fill: "freeze",

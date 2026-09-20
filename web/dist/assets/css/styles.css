@@ -491,23 +491,17 @@ a {
 .hero-visual {
   position: relative;
   width: 100%;
-  aspect-ratio: 1.02;
+  aspect-ratio: 1;
   max-width: 570px;
-  padding: 22px;
+  padding: 0;
   justify-self: end;
-  display: grid;
-  grid-template-rows: auto minmax(0, 1fr) auto;
-  gap: 12px;
+  display: block;
   appearance: none;
-  border: 1px solid var(--line-strong);
-  border-radius: var(--radius-lg);
+  border: 0;
+  border-radius: 18%;
   overflow: hidden;
   color: var(--ink);
-  background-color: rgba(255, 255, 255, 0.7);
-  background-image:
-    linear-gradient(rgba(11, 13, 12, 0.045) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(11, 13, 12, 0.045) 1px, transparent 1px);
-  background-size: 36px 36px;
+  background: transparent;
   box-shadow: 14px 14px 0 var(--ink);
   font: inherit;
   text-align: left;
@@ -536,41 +530,41 @@ a {
 }
 
 .hero-logo {
-  width: 100%;
-  height: 100%;
-  min-height: 0;
+  position: absolute;
+  inset: 0;
   display: block;
 }
 
-.hero-logo__panel {
-  fill: var(--ink);
-  filter: drop-shadow(7px 7px 0 rgba(11, 13, 12, 0.12));
+.hero-logo__image,
+.hero-logo__motion {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
 }
 
-.hero-logo__panel--one {
-  opacity: 0.9;
+.hero-logo__image {
+  z-index: 1;
+  object-fit: contain;
+  user-select: none;
 }
 
-.hero-logo__panel--two {
-  opacity: 0.95;
+.hero-logo__motion {
+  z-index: 2;
+  overflow: visible;
+  pointer-events: none;
 }
 
-.hero-logo__route,
-.hero-logo__door {
-  fill: var(--lime);
-  filter: drop-shadow(0 0 9px rgba(199, 255, 46, 0.28));
-}
-
-.hero-logo__door {
+.hero-logo__arrival-glow {
+  fill: rgba(199, 255, 46, 0.3);
+  filter: blur(16px);
+  opacity: 0;
   transform-box: fill-box;
   transform-origin: center;
 }
 
-.hero-logo__door-depth {
-  fill: var(--lime-dark);
-}
-
-.hero-visual.is-arriving .hero-logo__door {
+.hero-visual.is-arriving .hero-logo__arrival-glow {
   animation: door-arrival 520ms var(--ease);
 }
 
@@ -582,7 +576,7 @@ a {
 .hero-logo__member-head {
   fill: var(--surface);
   stroke: var(--ink);
-  stroke-width: 3;
+  stroke-width: 5;
 }
 
 .hero-logo__member-outline,
@@ -594,17 +588,20 @@ a {
 
 .hero-logo__member-outline {
   stroke: var(--surface);
-  stroke-width: 8;
+  stroke-width: 12;
 }
 
 .hero-logo__member-body {
   stroke: var(--ink);
-  stroke-width: 3.5;
+  stroke-width: 5;
 }
 
 .hero-visual__topline {
-  position: relative;
-  z-index: 2;
+  position: absolute;
+  z-index: 3;
+  top: 8.4%;
+  left: 8.4%;
+  right: 8.4%;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -629,8 +626,11 @@ a {
 }
 
 .hero-visual__hint {
-  position: relative;
-  z-index: 2;
+  position: absolute;
+  z-index: 3;
+  right: 8.4%;
+  bottom: 8.5%;
+  left: 8.4%;
   min-width: 0;
   padding-top: 12px;
   display: grid;
@@ -1955,9 +1955,14 @@ details[open] .faq-icon {
 }
 
 @keyframes door-arrival {
+  0%,
+  100% {
+    opacity: 0;
+    transform: scale(0.82);
+  }
   50% {
-    filter: drop-shadow(0 0 18px rgba(199, 255, 46, 0.85));
-    transform: scale(1.045);
+    opacity: 0.9;
+    transform: scale(1.08);
   }
 }
 
@@ -2300,8 +2305,7 @@ details[open] .faq-icon {
 
   .hero-visual {
     width: calc(100% - 12px);
-    padding: 14px;
-    gap: 10px;
+    padding: 0;
     box-shadow: 10px 10px 0 var(--ink);
   }
 
