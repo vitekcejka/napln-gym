@@ -431,7 +431,7 @@ a {
 .headline-highlight--secondary::before {
   bottom: 0.08em;
   height: 0.1em;
-  background: rgba(143, 184, 0, 0.68);
+  background: var(--lime);
 }
 
 .headline-highlight--primary::before {
@@ -723,16 +723,13 @@ a {
 
 .hero-visual__member-result strong {
   flex: 0 0 auto;
-  font-family: var(--font-display);
-  font-size: 1.2rem;
-  letter-spacing: -0.04em;
-  line-height: 1;
+  font: inherit;
+  letter-spacing: inherit;
 }
 
 .hero-visual__member-separator {
   color: var(--lime-dark);
-  font-size: 1.15rem;
-  line-height: 1;
+  font: inherit;
 }
 
 .hero-visual__member-separator[hidden] {
