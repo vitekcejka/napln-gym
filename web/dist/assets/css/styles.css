@@ -372,7 +372,7 @@ a {
   max-width: 860px;
   margin: 27px 0 24px;
   font-family: var(--font-display);
-  font-size: clamp(3rem, 3.8vw, 3.45rem);
+  font-size: clamp(2.65rem, 3.35vw, 3rem);
   font-weight: 900;
   letter-spacing: -0.02em;
   line-height: 1.08;
@@ -397,8 +397,8 @@ a {
 
   .hero-title__closing {
     margin-top: 0.16em;
-    font-size: 0.78em;
-    letter-spacing: -0.01em;
+    font-size: 1em;
+    letter-spacing: inherit;
   }
 }
 
@@ -501,13 +501,14 @@ a {
   border: 1px solid var(--line-strong);
   border-radius: var(--radius-lg);
   overflow: hidden;
-  background-color: rgba(255, 255, 255, 0.58);
+  color: var(--surface);
+  background-color: var(--ink);
   background-image:
-    linear-gradient(rgba(11, 13, 12, 0.055) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(11, 13, 12, 0.055) 1px, transparent 1px);
+    linear-gradient(rgba(255, 255, 255, 0.055) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.055) 1px, transparent 1px);
   background-size: 36px 36px;
-  transform: rotate(0.8deg);
-  box-shadow: 14px 14px 0 var(--ink);
+  transform: rotate(-0.6deg);
+  box-shadow: 13px 13px 0 var(--lime);
   opacity: 0;
   animation: visual-in 900ms 180ms var(--ease) forwards;
 }
@@ -520,17 +521,23 @@ a {
   color: var(--ink);
 }
 
-.hero-visual__block {
-  fill: var(--ink);
+.hero-visual__rail,
+.hero-visual__path,
+.hero-visual__arrow {
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.hero-visual__rail {
+  stroke: rgba(255, 255, 255, 0.16);
+  stroke-width: 24;
 }
 
 .hero-visual__path,
 .hero-visual__arrow {
-  fill: none;
   stroke: var(--lime);
-  stroke-width: 10;
-  stroke-linecap: round;
-  stroke-linejoin: round;
+  stroke-width: 8;
 }
 
 .hero-visual__path {
@@ -552,6 +559,12 @@ a {
   animation: node-in 480ms var(--ease) forwards;
 }
 
+.hero-visual__node-ring {
+  fill: var(--ink);
+  stroke: var(--surface);
+  stroke-width: 3;
+}
+
 .pulse-one {
   animation-delay: 0.9s;
 }
@@ -560,6 +573,10 @@ a {
 }
 .pulse-three {
   animation-delay: 1.5s;
+}
+
+.pulse-four {
+  animation-delay: 1.8s;
 }
 
 .hero-visual__topline {
@@ -574,7 +591,8 @@ a {
 .hero-visual__label {
   padding: 7px 11px;
   color: var(--surface);
-  background: var(--ink);
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  background: rgba(255, 255, 255, 0.07);
   font-size: 0.75rem;
   font-weight: 750;
   letter-spacing: 0.06em;
@@ -583,38 +601,47 @@ a {
 
 .hero-visual__label--end {
   color: var(--ink);
+  border-color: var(--lime);
   background: var(--lime);
 }
 
-.hero-visual__caption {
+.hero-visual__stages {
   position: relative;
   z-index: 2;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 10px;
+  list-style: none;
+}
+
+.hero-visual__stages li {
   min-width: 0;
-  padding-top: 12px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 14px;
-  border-top: 1px solid var(--line-strong);
-  color: var(--ink);
-  font-size: 0.75rem;
-  font-weight: 750;
+  padding-top: 10px;
+  border-top: 1px solid rgba(255, 255, 255, 0.22);
+}
+
+.hero-visual__stages span,
+.hero-visual__stages strong {
+  display: block;
   line-height: 1.25;
-  letter-spacing: 0.04em;
   text-transform: uppercase;
 }
 
-.hero-visual__caption span:first-child {
-  flex: 0 0 auto;
-  padding: 4px 7px;
-  color: var(--ink);
-  background: var(--lime);
-  white-space: nowrap;
+.hero-visual__stages span {
+  margin-bottom: 3px;
+  color: var(--lime);
+  font-size: 0.68rem;
+  font-weight: 850;
+  letter-spacing: 0.08em;
 }
 
-.hero-visual__caption span:last-child {
-  min-width: 0;
-  text-align: right;
+.hero-visual__stages strong {
+  color: var(--surface);
+  font-size: 0.76rem;
+  font-weight: 850;
+  letter-spacing: 0.035em;
 }
 
 [data-hero-item] {
@@ -2246,15 +2273,16 @@ details[open] .faq-icon {
     width: calc(100% - 12px);
     padding: 14px;
     gap: 10px;
-    box-shadow: 11px 11px 0 var(--ink);
-    transform: rotate(0.6deg);
+    box-shadow: 9px 9px 0 var(--lime);
+    transform: rotate(-0.4deg);
   }
 
-  .hero-visual__caption {
-    padding-top: 9px;
-    gap: 8px;
-    font-size: 0.62rem;
-    letter-spacing: 0.025em;
+  .hero-visual__stages {
+    gap: 6px;
+  }
+
+  .hero-visual__stages strong {
+    font-size: 0.64rem;
   }
 
   .hero__ticker-track {
