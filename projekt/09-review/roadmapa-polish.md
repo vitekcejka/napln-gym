@@ -18,7 +18,7 @@
 | # | Sekce | Co budeme řešit | Stav |
 |---:|---|---|---|
 | PC-1 | Navigace a header | Výška, hustota, odkazy, sticky chování a hlavní CTA | ✅ |
-| PC-2 | Hero | Síla prvního dojmu, velikost H1, výška, pilotní informace a CTA | 🟨 |
+| PC-2 | Hero | Síla prvního dojmu, velikost H1, výška, pilotní informace a CTA | ✅ |
 | PC-3 | Sedm úniků | Kompaktnější mapa bez ztráty interaktivity a lime cesty | ⬜ |
 | PC-4 | Jak to funguje | Čtyři kroky, menší výška a odstranění opakování | ⬜ |
 | PC-5 | Pilotní spolupráce | Formulace nabídky, benefity, cíl a CTA | ⬜ |
@@ -77,4 +77,4 @@
 
 ## Aktuální krok
 
-**Další na řadě:** PC-2 · Hero.
+**Další na řadě:** PC-3 · Sedm úniků.
