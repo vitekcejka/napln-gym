@@ -174,6 +174,82 @@
     portrait.classList.add("has-photo");
   }
 
+  const memberEntry = document.querySelector("[data-member-entry]");
+  const memberLayer = memberEntry?.querySelector("[data-member-layer]");
+  if (memberEntry && memberLayer) {
+    const svgNamespace = "http://www.w3.org/2000/svg";
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+    let arrivalTimer = 0;
+
+    const createSvgElement = (name, attributes = {}) => {
+      const element = document.createElementNS(svgNamespace, name);
+      Object.entries(attributes).forEach(([key, value]) =>
+        element.setAttribute(key, value),
+      );
+      return element;
+    };
+
+    const pulseDoor = () => {
+      window.clearTimeout(arrivalTimer);
+      memberEntry.classList.remove("is-arriving");
+      void memberEntry.offsetWidth;
+      memberEntry.classList.add("is-arriving");
+      arrivalTimer = window.setTimeout(
+        () => memberEntry.classList.remove("is-arriving"),
+        560,
+      );
+    };
+
+    memberEntry.addEventListener("click", () => {
+      if (reducedMotion.matches) {
+        pulseDoor();
+        return;
+      }
+
+      const member = createSvgElement("g", {
+        class: "hero-logo__member",
+        opacity: "1",
+      });
+      const head = createSvgElement("circle", {
+        class: "hero-logo__member-head",
+        cx: "0",
+        cy: "-12",
+        r: "7",
+      });
+      const bodyPath = "M0 -4v20M-10 5 0 0 10 5M-7 30 0 16 7 30";
+      const outline = createSvgElement("path", {
+        class: "hero-logo__member-outline",
+        d: bodyPath,
+      });
+      const body = createSvgElement("path", {
+        class: "hero-logo__member-body",
+        d: bodyPath,
+      });
+      const motion = createSvgElement("animateMotion", {
+        path: "M130 410 C230 410 270 397 330 370 C385 345 425 322 470 292",
+        dur: "1.25s",
+        begin: "0s",
+        fill: "freeze",
+        calcMode: "spline",
+        keyTimes: "0;1",
+        keySplines: "0.22 1 0.36 1",
+      });
+      const fade = createSvgElement("animate", {
+        attributeName: "opacity",
+        values: "1;1;0",
+        keyTimes: "0;0.82;1",
+        dur: "1.25s",
+        begin: "0s",
+        fill: "freeze",
+      });
+
+      member.append(head, outline, body, motion, fade);
+      memberLayer.appendChild(member);
+      window.setTimeout(pulseDoor, 1020);
+      window.setTimeout(() => member.remove(), 1380);
+    });
+  }
+
   document.querySelectorAll("[data-current-year]").forEach((element) => {
     element.textContent = String(new Date().getFullYear());
   });

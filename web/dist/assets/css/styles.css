@@ -491,92 +491,115 @@ a {
 .hero-visual {
   position: relative;
   width: 100%;
-  aspect-ratio: 1.08;
+  aspect-ratio: 1.02;
   max-width: 570px;
   padding: 22px;
   justify-self: end;
   display: grid;
   grid-template-rows: auto minmax(0, 1fr) auto;
-  gap: 16px;
+  gap: 12px;
+  appearance: none;
   border: 1px solid var(--line-strong);
   border-radius: var(--radius-lg);
   overflow: hidden;
-  color: var(--surface);
-  background-color: var(--ink);
+  color: var(--ink);
+  background-color: rgba(255, 255, 255, 0.7);
   background-image:
-    linear-gradient(rgba(255, 255, 255, 0.055) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255, 255, 255, 0.055) 1px, transparent 1px);
+    linear-gradient(rgba(11, 13, 12, 0.045) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(11, 13, 12, 0.045) 1px, transparent 1px);
   background-size: 36px 36px;
-  transform: rotate(-0.6deg);
-  box-shadow: 13px 13px 0 var(--lime);
+  box-shadow: 14px 14px 0 var(--ink);
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+  translate: 0 0;
+  transition:
+    translate 220ms var(--ease),
+    box-shadow 220ms var(--ease);
   opacity: 0;
   animation: visual-in 900ms 180ms var(--ease) forwards;
 }
 
-.hero-visual svg {
+.hero-visual:hover {
+  translate: 0 -3px;
+  box-shadow: 17px 17px 0 var(--ink);
+}
+
+.hero-visual:active {
+  translate: 0 1px;
+  box-shadow: 11px 11px 0 var(--ink);
+}
+
+.hero-visual:focus-visible {
+  outline: 3px solid var(--lime-dark);
+  outline-offset: 5px;
+}
+
+.hero-logo {
   width: 100%;
   height: 100%;
   min-height: 0;
   display: block;
-  color: var(--ink);
 }
 
-.hero-visual__rail,
-.hero-visual__path,
-.hero-visual__arrow {
+.hero-logo__panel {
+  fill: var(--ink);
+  filter: drop-shadow(7px 7px 0 rgba(11, 13, 12, 0.12));
+}
+
+.hero-logo__panel--one {
+  opacity: 0.9;
+}
+
+.hero-logo__panel--two {
+  opacity: 0.95;
+}
+
+.hero-logo__route,
+.hero-logo__door {
+  fill: var(--lime);
+  filter: drop-shadow(0 0 9px rgba(199, 255, 46, 0.28));
+}
+
+.hero-logo__door {
+  transform-box: fill-box;
+  transform-origin: center;
+}
+
+.hero-logo__door-depth {
+  fill: var(--lime-dark);
+}
+
+.hero-visual.is-arriving .hero-logo__door {
+  animation: door-arrival 520ms var(--ease);
+}
+
+.hero-logo__member {
+  pointer-events: none;
+  filter: drop-shadow(0 2px 2px rgba(11, 13, 12, 0.32));
+}
+
+.hero-logo__member-head {
+  fill: var(--surface);
+  stroke: var(--ink);
+  stroke-width: 3;
+}
+
+.hero-logo__member-outline,
+.hero-logo__member-body {
   fill: none;
   stroke-linecap: round;
   stroke-linejoin: round;
 }
 
-.hero-visual__rail {
-  stroke: rgba(255, 255, 255, 0.16);
-  stroke-width: 24;
-}
-
-.hero-visual__path,
-.hero-visual__arrow {
-  stroke: var(--lime);
+.hero-logo__member-outline {
+  stroke: var(--surface);
   stroke-width: 8;
 }
 
-.hero-visual__path {
-  stroke-dasharray: 1120;
-  stroke-dashoffset: 1120;
-  animation: path-draw 1.4s 650ms var(--ease) forwards;
-}
-
-.hero-visual__arrow {
-  opacity: 0;
-  animation: fade-in 250ms 1.75s ease forwards;
-}
-
-.hero-visual__pulse {
-  fill: var(--lime);
-  opacity: 0;
-  transform-box: fill-box;
-  transform-origin: center;
-  animation: node-in 480ms var(--ease) forwards;
-}
-
-.hero-visual__node-ring {
-  fill: var(--ink);
-  stroke: var(--surface);
-  stroke-width: 3;
-}
-
-.pulse-one {
-  animation-delay: 0.9s;
-}
-.pulse-two {
-  animation-delay: 1.2s;
-}
-.pulse-three {
-  animation-delay: 1.5s;
-}
-
-.pulse-four {
-  animation-delay: 1.8s;
+.hero-logo__member-body {
+  stroke: var(--ink);
+  stroke-width: 3.5;
 }
 
 .hero-visual__topline {
@@ -591,8 +614,8 @@ a {
 .hero-visual__label {
   padding: 7px 11px;
   color: var(--surface);
-  border: 1px solid rgba(255, 255, 255, 0.22);
-  background: rgba(255, 255, 255, 0.07);
+  border: 1px solid var(--ink);
+  background: var(--ink);
   font-size: 0.75rem;
   font-weight: 750;
   letter-spacing: 0.06em;
@@ -605,43 +628,42 @@ a {
   background: var(--lime);
 }
 
-.hero-visual__stages {
+.hero-visual__hint {
   position: relative;
   z-index: 2;
-  margin: 0;
-  padding: 0;
-  display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 10px;
-  list-style: none;
-}
-
-.hero-visual__stages li {
   min-width: 0;
-  padding-top: 10px;
-  border-top: 1px solid rgba(255, 255, 255, 0.22);
-}
-
-.hero-visual__stages span,
-.hero-visual__stages strong {
-  display: block;
-  line-height: 1.25;
+  padding-top: 12px;
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 9px;
+  border-top: 1px solid var(--line-strong);
+  color: var(--ink);
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.035em;
+  line-height: 1.35;
   text-transform: uppercase;
 }
 
-.hero-visual__stages span {
-  margin-bottom: 3px;
-  color: var(--lime);
-  font-size: 0.68rem;
-  font-weight: 850;
-  letter-spacing: 0.08em;
+.hero-visual__hint-dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--lime-dark);
+  box-shadow: 0 0 0 5px rgba(143, 184, 0, 0.12);
 }
 
-.hero-visual__stages strong {
-  color: var(--surface);
-  font-size: 0.76rem;
-  font-weight: 850;
-  letter-spacing: 0.035em;
+.hero-visual__hint-arrow {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  display: inline-grid;
+  place-items: center;
+  color: var(--ink);
+  background: var(--lime);
+  font-size: 1rem;
+  line-height: 1;
 }
 
 [data-hero-item] {
@@ -1928,7 +1950,14 @@ details[open] .faq-icon {
   }
   to {
     opacity: 1;
-    transform: translateY(0) rotate(1.5deg) scale(1);
+    transform: translateY(0) rotate(0.6deg) scale(1);
+  }
+}
+
+@keyframes door-arrival {
+  50% {
+    filter: drop-shadow(0 0 18px rgba(199, 255, 46, 0.85));
+    transform: scale(1.045);
   }
 }
 
@@ -2273,16 +2302,12 @@ details[open] .faq-icon {
     width: calc(100% - 12px);
     padding: 14px;
     gap: 10px;
-    box-shadow: 9px 9px 0 var(--lime);
-    transform: rotate(-0.4deg);
+    box-shadow: 10px 10px 0 var(--ink);
   }
 
-  .hero-visual__stages {
-    gap: 6px;
-  }
-
-  .hero-visual__stages strong {
-    font-size: 0.64rem;
+  .hero-visual__hint {
+    gap: 7px;
+    font-size: 0.68rem;
   }
 
   .hero__ticker-track {

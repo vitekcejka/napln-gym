@@ -155,59 +155,58 @@
             </div>
           </div>
 
-          <div class="hero-visual" aria-hidden="true" data-hero-visual>
-            <div class="hero-visual__topline">
-              <div class="hero-visual__label">Cesta nového člena</div>
-              <div class="hero-visual__label hero-visual__label--end">
-                Jeden systém
-              </div>
-            </div>
-            <svg viewBox="0 0 640 260" role="img">
-              <path
-                class="hero-visual__rail"
-                d="M22 220c50 0 48-35 93-35 65 0 72-48 137-48 67 0 75-48 142-48 70 0 78-48 150-48h66"
+          <button
+            class="hero-visual"
+            type="button"
+            aria-label="Ukázat, jak nový člen vstoupí do gymu"
+            aria-describedby="hero-visual-hint"
+            data-hero-visual
+            data-member-entry
+          >
+            <span class="hero-visual__topline">
+              <span class="hero-visual__label">Od zájmu</span>
+              <span class="hero-visual__label hero-visual__label--end">
+                K členství
+              </span>
+            </span>
+            <svg
+              class="hero-logo"
+              viewBox="0 0 640 460"
+              aria-hidden="true"
+              focusable="false"
+            >
+              <polygon
+                class="hero-logo__panel hero-logo__panel--one"
+                points="55,190 155,135 155,340 55,395"
               />
-              <path
-                class="hero-visual__path"
-                d="M22 220c50 0 48-35 93-35 65 0 72-48 137-48 67 0 75-48 142-48 70 0 78-48 150-48h66"
+              <polygon
+                class="hero-logo__panel hero-logo__panel--two"
+                points="205,115 345,40 345,300 205,375"
               />
-              <path class="hero-visual__arrow" d="m586 19 27 22-27 22" />
-              <circle class="hero-visual__node-ring" cx="115" cy="185" r="17" />
-              <circle
-                class="hero-visual__pulse pulse-one"
-                cx="115"
-                cy="185"
-                r="7"
+              <polygon
+                class="hero-logo__panel hero-logo__panel--three"
+                points="395,100 565,10 565,320 395,410"
               />
-              <circle class="hero-visual__node-ring" cx="252" cy="137" r="17" />
-              <circle
-                class="hero-visual__pulse pulse-two"
-                cx="252"
-                cy="137"
-                r="7"
+              <polygon
+                class="hero-logo__route"
+                points="70,430 315,430 520,310 435,355"
               />
-              <circle class="hero-visual__node-ring" cx="394" cy="89" r="17" />
-              <circle
-                class="hero-visual__pulse pulse-three"
-                cx="394"
-                cy="89"
-                r="7"
+              <polygon
+                class="hero-logo__door"
+                points="435,185 520,230 520,310 435,355"
               />
-              <circle class="hero-visual__node-ring" cx="544" cy="41" r="17" />
-              <circle
-                class="hero-visual__pulse pulse-four"
-                cx="544"
-                cy="41"
-                r="7"
+              <polygon
+                class="hero-logo__door-depth"
+                points="520,230 534,222 534,302 520,310"
               />
+              <g data-member-layer></g>
             </svg>
-            <ol class="hero-visual__stages">
-              <li><span>01</span><strong>Zájem</strong></li>
-              <li><span>02</span><strong>Kontakt</strong></li>
-              <li><span>03</span><strong>Návštěva</strong></li>
-              <li><span>04</span><strong>Členství</strong></li>
-            </ol>
-          </div>
+            <span class="hero-visual__hint" id="hero-visual-hint">
+              <span class="hero-visual__hint-dot" aria-hidden="true"></span>
+              Klikněte a pošlete dalšího člena dovnitř
+              <span class="hero-visual__hint-arrow" aria-hidden="true">↗</span>
+            </span>
+          </button>
         </div>
 
         <div class="hero__ticker" aria-hidden="true">
