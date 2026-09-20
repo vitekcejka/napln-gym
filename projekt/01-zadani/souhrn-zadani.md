@@ -34,7 +34,7 @@ Naplň Gym pomáhá českým klasickým gymům a fitness centrům zaplnit volnou
 
 ## Veřejné skutečnosti
 
-- Projekt je v pre-launch fázi a hledá jeden pilotní gym.
+- Projekt je v pre-launch fázi a hledá dva pilotní gymy.
 - Pilot dostane výrazně zvýhodněné podmínky.
 - První měřitelné výsledky chceme vidět přibližně během 30–60 dnů; nejde o slib kompletně plného gymu.
 - Zakladatel je Vítězslav Čejka.
@@ -60,4 +60,3 @@ Na web se nesmí dostat:
 - IČO a sídlo;
 - potvrzené znění a podmínky garance;
 - kontrola právního textu podle skutečného scheduleru.
-

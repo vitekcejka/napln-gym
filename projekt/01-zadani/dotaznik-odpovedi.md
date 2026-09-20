@@ -173,7 +173,7 @@ Pokud systém funguje a spolupráce dává ekonomický smysl oběma stranám, na
 
 Finální pricing zatím není pevně stanovený.
 
-První pilotní spolupráce může být výrazně zvýhodněná, protože cílem je získat první reálná data, zkušenosti a case study.
+První dvě pilotní spolupráce mohou být výrazně zvýhodněné, protože cílem je získat první reálná data, zkušenosti a case studies.
 
 Pracovně může první klient začínat například kolem 5 000 Kč měsíčně nebo přibližně 15 000 Kč za úvodní startovací fázi, ale nejde o budoucí standardní cenu služby.
 
@@ -213,7 +213,7 @@ Na začátku spolupráce se společně nastaví konkrétní měřitelný cíl. P
 
 Přesná metrika garance zatím není definitivně stanovena a nesmí být na webu automaticky vymyšlena.
 
-Aktuálně hledáme 1 pilotní gym, kde systém Naplň Gym nasadíme za výrazně zvýhodněnou cenu.
+Aktuálně hledáme 2 pilotní gymy, kde systém Naplň Gym nasadíme za výrazně zvýhodněnou cenu.
 
 ## B11 — Existují podmínky, za kterých klienta odmítnete?
 
@@ -615,7 +615,7 @@ Zakladatel může být na webu vidět jako člověk za značkou, pokud to pomů�
 
 Zatím ne.
 
-Naplň Gym je v pre-launch fázi a právě hledá prvního pilotního klienta / první pilotní gym.
+Naplň Gym je v pre-launch fázi a právě hledá první dva pilotní klienty / první dva pilotní gymy.
 
 ## E2 — Jaké konkrétní výsledky lze uvést v číslech a za jaké období?
 
@@ -636,7 +636,7 @@ Můžeme komunikovat, jaké metriky budeme sledovat, ale bez falešných dat.
 
 Zatím ne.
 
-První pilotní gym má být zároveň první skutečná case study.
+První dva pilotní gymy mají být zároveň prvními skutečnými case studies.
 
 V budoucnu by case study měla ukazovat:
 - výchozí stav,
@@ -682,7 +682,7 @@ LinkedIn a další business profily mohou vzniknout později, ale nejsou nutnou 
 
 Hlavní poctivý důvod ke kontaktu je:
 
-Aktuálně hledáme 1 pilotní gym, kde systém Naplň Gym nasadíme za výrazně zvýhodněnou cenu.
+Aktuálně hledáme 2 pilotní gymy, kde systém Naplň Gym nasadíme za výrazně zvýhodněnou cenu.
 
 Důvěryhodnost v první verzi webu má stát hlavně na:
 - jasné specializaci na gymy,
@@ -902,7 +902,7 @@ Hlavní měřítko úspěchu je jednoduché:
 
 Rezervují vhodní majitelé gymů schůzky?
 
-A vede web společně s outboundem k získání prvního pilotního klienta?
+A vede web společně s outboundem k získání prvních dvou pilotních klientů?
 
 Pokročilé eventy, dashboardy, UTM tracking a další analytiku lze přidat v dalších verzích.
 
@@ -999,7 +999,7 @@ Kolik z nich se stane platícími členy.
 
 ### 3. Snižujeme riziko spolupráce
 
-První pilotní gym dostane výrazně zvýhodněné podmínky.
+První dva pilotní gymy dostanou výrazně zvýhodněné podmínky.
 
 Spolupráce stojí na předem domluveném měřitelném cíli a garanci.
 
@@ -1113,7 +1113,7 @@ ROI kalkulaci bez reálných dat
 
 Veřejně můžeme komunikovat:
 
-„Aktuálně hledáme 1 pilotní gym, kde systém Naplň Gym nasadíme za výrazně zvýhodněnou cenu.“
+„Aktuálně hledáme 2 pilotní gymy, kde systém Naplň Gym nasadíme za výrazně zvýhodněnou cenu.“
 
 Konkrétní nabídka se řeší až podle konkrétního gymu.
 
@@ -2115,7 +2115,7 @@ Pilotní nabídka má být vidět relativně brzy.
 
 Například menší badge nebo krátká informace:
 
-„Aktuálně hledáme 1 pilotní gym.“
+„Aktuálně hledáme 2 pilotní gymy.“
 
 S doplněním, že spolupráce proběhne za výrazně zvýhodněných podmínek.
 
@@ -2245,7 +2245,7 @@ pro koho je
 
 jaký výsledek přináší
 
-že aktuálně hledáme 1 pilotní gym
+že aktuálně hledáme 2 pilotní gymy
 
 hlavní CTA
 
@@ -2282,7 +2282,7 @@ Silný trust blok.
 
 Obsah:
 
-aktuálně 1 pilotní gym
+aktuálně 2 pilotní gymy
 
 výrazně zvýhodněné podmínky
 
@@ -3335,7 +3335,7 @@ Dlouhodobě se může poměr přirozeně posouvat více směrem k samostatné fi
 
 ## N4 Je důležitější získat více poptávek, nebo méně, ale lépe kvalifikovaných?
 
-Ve V1 je hlavní prioritou získat prvního vhodného klientského pilota a následně vytvořit silnou referenci.
+Ve V1 je hlavní prioritou získat první dva vhodné klientské piloty a následně vytvořit silné reference.
 
 Proto nechceme booking zbytečně omezovat tvrdou kvalifikací.
 

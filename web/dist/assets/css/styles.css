@@ -606,8 +606,8 @@ a {
   left: 0;
   overflow: hidden;
   border-block: 1px solid var(--ink);
-  color: var(--ink);
-  background: var(--lime);
+  color: var(--surface);
+  background: var(--ink);
 }
 
 .hero__ticker-track {
@@ -633,6 +633,7 @@ a {
 }
 
 .hero__ticker-track i {
+  color: var(--lime);
   font-style: normal;
 }
 

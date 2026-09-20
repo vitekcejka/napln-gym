@@ -6,7 +6,7 @@
 | Systém Naplň Gym | schváleno | název produktu/metody |
 | Hlavní CTA | schváleno | „Zjistit, kde mi utíkají členové“ |
 | Vedlejší CTA | schváleno | „Jak to funguje“ |
-| Pilotní nabídka | schváleno | právě 1 pilotní gym, výrazně zvýhodněné podmínky |
+| Pilotní nabídka | schváleno | právě 2 pilotní gymy, výrazně zvýhodněné podmínky |
 | Doba prvních měřitelných výsledků | schváleno | přibližně 30–60 dní, bez slibu plného gymu |
 | Sedm oblastí systému | schváleno | web, databáze, reakce, nová poptávka, recenze, návštěva/prodej, nezvednuté hovory |
 | Proces spolupráce | schváleno | čtyři kroky z briefu |
@@ -19,4 +19,3 @@
 | IČO a sídlo | chybí | placeholder před spuštěním nahradit |
 | Znění garance | otevřeno | na webu pouze obecný princip bez vymyšlené metriky |
 | Klienti, reference, výsledky | záměrně nejsou | ve V1 se nevytvářejí náhrady |
-

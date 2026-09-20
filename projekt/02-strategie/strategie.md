@@ -4,7 +4,7 @@
 
 ## Jediný obchodní cíl
 
-Dostat vhodného majitele gymu z outboundového kontaktu na nezávaznou 30minutovou schůzku a pomoci získat prvního pilotního klienta.
+Dostat vhodného majitele gymu z outboundového kontaktu na nezávaznou 30minutovou schůzku a pomoci získat první dva pilotní klienty.
 
 ## Hlavní problém publika
 
@@ -36,5 +36,4 @@ Naplň Gym je malý specializovaný growth partner pro fitness centra. Není to 
 
 ## Metrika úspěchu
 
-Web plní účel, pokud v kombinaci s outboundem pomůže během prvních 30 dnů získat alespoň jednoho vhodného pilotního klienta. Vanity metriky nejsou ve V1 rozhodující.
-
+Web plní účel, pokud v kombinaci s outboundem pomůže během prvních 30 dnů získat dva vhodné pilotní klienty. Vanity metriky nejsou ve V1 rozhodující.
