@@ -180,6 +180,9 @@
   const memberPrompt = memberEntry?.querySelector("[data-member-prompt]");
   const memberResult = memberEntry?.querySelector("[data-member-result]");
   const memberCountLabel = memberEntry?.querySelector("[data-member-count]");
+  const memberSeparator = memberEntry?.querySelector(
+    "[data-member-separator]",
+  );
   const memberStatus = memberEntry?.querySelector("[data-member-status]");
   if (
     memberEntry &&
@@ -188,6 +191,7 @@
     memberPrompt &&
     memberResult &&
     memberCountLabel &&
+    memberSeparator &&
     memberStatus
   ) {
     const svgNamespace = "http://www.w3.org/2000/svg";
@@ -216,7 +220,7 @@
       const trail = createSvgElement("g", {
         class: "hero-logo__trail",
       });
-      const stops = [0.04, 0.16, 0.28, 0.4, 0.52, 0.64, 0.76, 0.88, 0.985];
+      const stops = [0.04, 0.16, 0.28, 0.4, 0.52, 0.64, 0.76, 0.88, 0.94];
 
       stops.forEach((progress, index) => {
         const position = routePosition(progress);
@@ -278,22 +282,31 @@
       window.setTimeout(() => {
         memberCount += 1;
 
+        const hasMilestone = memberCount >= 5;
         const status =
           memberCount >= 20
-            ? "Přesně takhle vypadá růst."
+            ? "Takhle to má vypadat."
             : memberCount >= 10
               ? "Volná kapacita mizí."
               : memberCount >= 5
                 ? "Začíná se to plnit."
-                : "První člen uvnitř.";
+                : memberCount === 1
+                  ? "člen"
+                  : "noví členové";
 
         memberPrompt.hidden = true;
         memberResult.hidden = false;
-        memberCountLabel.textContent = String(memberCount);
+        memberCountLabel.textContent = hasMilestone
+          ? `${memberCount} nových členů`
+          : `${memberCount}.`;
+        memberSeparator.hidden = !hasMilestone;
         memberStatus.textContent = status;
+        const counterText = `${memberCountLabel.textContent}${
+          hasMilestone ? " · " : " "
+        }${status}`;
         memberEntry.setAttribute(
           "aria-label",
-          `Poslat dalšího člena dovnitř. Uvnitř: ${memberCount}. ${status}`,
+          `Poslat dalšího člena dovnitř. ${counterText}`,
         );
 
         const plusOne = document.createElement("span");
