@@ -177,8 +177,25 @@
   const memberEntry = document.querySelector("[data-member-entry]");
   const memberLayer = memberEntry?.querySelector("[data-member-layer]");
   const arrivalLayer = memberEntry?.querySelector("[data-arrival-layer]");
-  if (memberEntry && memberLayer && arrivalLayer) {
+  const memberPrompt = memberEntry?.querySelector("[data-member-prompt]");
+  const memberResult = memberEntry?.querySelector("[data-member-result]");
+  const memberCountLabel = memberEntry?.querySelector("[data-member-count]");
+  const memberStatus = memberEntry?.querySelector("[data-member-status]");
+  if (
+    memberEntry &&
+    memberLayer &&
+    arrivalLayer &&
+    memberPrompt &&
+    memberResult &&
+    memberCountLabel &&
+    memberStatus
+  ) {
     const svgNamespace = "http://www.w3.org/2000/svg";
+    const prefersReducedMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)",
+    ).matches;
+    const memberCompletionDelay = prefersReducedMotion ? 60 : 1520;
+    let memberCount = 0;
 
     const createSvgElement = (name, attributes = {}) => {
       const element = document.createElementNS(svgNamespace, name);
@@ -257,6 +274,40 @@
 
       arrivalSignal.append(arrivalGlow, arrivalRing);
       arrivalLayer.appendChild(arrivalSignal);
+
+      window.setTimeout(() => {
+        memberCount += 1;
+
+        const status =
+          memberCount >= 20
+            ? "Přesně takhle vypadá růst."
+            : memberCount >= 10
+              ? "Volná kapacita mizí."
+              : memberCount >= 5
+                ? "Začíná se to plnit."
+                : "První člen uvnitř.";
+
+        memberPrompt.hidden = true;
+        memberResult.hidden = false;
+        memberCountLabel.textContent = String(memberCount);
+        memberStatus.textContent = status;
+        memberEntry.setAttribute(
+          "aria-label",
+          `Poslat dalšího člena dovnitř. Uvnitř: ${memberCount}. ${status}`,
+        );
+
+        const plusOne = document.createElement("span");
+        plusOne.className = "hero-visual__plus-one";
+        plusOne.textContent = "+1";
+        plusOne.setAttribute("aria-hidden", "true");
+        plusOne.style.setProperty(
+          "--plus-offset",
+          `${((memberCount - 1) % 5 - 2) * 24}px`,
+        );
+        memberEntry.appendChild(plusOne);
+        window.setTimeout(() => plusOne.remove(), 900);
+      }, memberCompletionDelay);
+
       window.setTimeout(() => trail.remove(), 1900);
       window.setTimeout(() => arrivalSignal.remove(), 1700);
     });

@@ -24,11 +24,11 @@
     <title>Naplň Gym — více platících členů pro váš gym</title>
     <link
       rel="icon"
-      href="assets/favicon.png"
+      href="assets/favicon-inverted.png"
       type="image/png"
       sizes="1254x1254"
     />
-    <link rel="apple-touch-icon" href="assets/favicon.png" />
+    <link rel="apple-touch-icon" href="assets/favicon-inverted.png" />
     <link rel="stylesheet" href="assets/css/styles.css" />
     <script src="assets/js/config.js" defer></script>
     <script src="assets/js/script.js" defer></script>
@@ -40,7 +40,7 @@
       <div class="announcement-bar" data-announcement-bar>
         <a href="#pilot" data-scroll-to="pilot">
           <span
-            >Aktuálně hledáme 2 pilotní gymy, se kterými to postavíme od
+            >Aktuálně v září hledáme 2 gymy, se kterými to postavíme od
             podlahy.</span
           >
           <strong>Zjistit víc</strong>
@@ -113,24 +113,25 @@
           <div class="hero__content">
             <div class="eyebrow hero__eyebrow" data-hero-item>
               <span class="eyebrow__dot" aria-hidden="true"></span>
-              2 pilotní gymy · zvýhodněné podmínky
+              PILOTNÍ GYM · PILOTNÍ CENA
             </div>
 
             <h1 id="hero-title" data-hero-item>
               <span>Prázdný gym</span>
-              <span class="headline-highlight">nevydělává.</span>
+              <span class="headline-highlight headline-highlight--secondary"
+                >nevydělává.</span
+              >
               <span class="hero-title__closing"
                 >Pojďme ho
-                <span class="headline-highlight headline-highlight--secondary"
+                <span class="headline-highlight headline-highlight--primary"
                   >naplnit.</span
                 ></span
               >
             </h1>
 
             <p class="hero__lead" data-hero-item>
-              Stavíme systém, který přivádí nové zájemce a pomáhá je měnit v
-              platící členy. Neřešíme jen reklamy. Hledáme a opravujeme místa,
-              kde vám lidé cestou mizí.
+              Najdeme, kde vám cestou ke členství mizí nejvíc lidí. Opravíme
+              největší úniky a pak přivedeme další zájemce.
             </p>
 
             <div class="hero__actions" data-hero-item>
@@ -190,7 +191,16 @@
             </span>
             <span class="hero-visual__hint" id="hero-visual-hint">
               <span class="hero-visual__hint-dot" aria-hidden="true"></span>
-              Klikněte a pošlete dalšího člena dovnitř
+              <span class="hero-visual__hint-copy" aria-live="polite">
+                <span data-member-prompt
+                  >Klikněte a pošlete dalšího člena dovnitř</span
+                >
+                <span class="hero-visual__member-result" data-member-result hidden>
+                  <strong data-member-count>0</strong>
+                  <span aria-hidden="true">→</span>
+                  <span data-member-status></span>
+                </span>
+              </span>
               <span class="hero-visual__hint-arrow" aria-hidden="true">↗</span>
             </span>
           </button>

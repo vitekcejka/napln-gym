@@ -429,6 +429,12 @@ a {
 }
 
 .headline-highlight--secondary::before {
+  bottom: 0.08em;
+  height: 0.1em;
+  background: rgba(143, 184, 0, 0.68);
+}
+
+.headline-highlight--primary::before {
   height: 0.3em;
   animation-delay: 980ms;
 }
@@ -698,6 +704,47 @@ a {
   border-radius: 50%;
   background: var(--lime-dark);
   box-shadow: 0 0 0 5px rgba(143, 184, 0, 0.12);
+}
+
+.hero-visual__hint-copy {
+  min-width: 0;
+}
+
+.hero-visual__member-result {
+  display: flex;
+  min-width: 0;
+  align-items: baseline;
+  gap: 7px;
+}
+
+.hero-visual__member-result[hidden] {
+  display: none;
+}
+
+.hero-visual__member-result strong {
+  flex: 0 0 auto;
+  font-family: var(--font-display);
+  font-size: 1.2rem;
+  letter-spacing: -0.04em;
+  line-height: 1;
+}
+
+.hero-visual__plus-one {
+  position: absolute;
+  z-index: 4;
+  top: 48%;
+  left: calc(74% + var(--plus-offset, 0px));
+  color: var(--ink);
+  font-family: var(--font-display);
+  font-size: 1rem;
+  font-weight: 900;
+  letter-spacing: -0.02em;
+  line-height: 1;
+  paint-order: stroke fill;
+  pointer-events: none;
+  filter: drop-shadow(0 0 9px var(--lime));
+  -webkit-text-stroke: 4px var(--lime);
+  animation: member-plus-one 760ms var(--ease) forwards;
 }
 
 .hero-visual__hint-arrow {
@@ -2043,6 +2090,24 @@ details[open] .faq-icon {
   72% {
     opacity: 0.45;
     transform: scale(1.22);
+  }
+}
+
+@keyframes member-plus-one {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, 10px) scale(0.65);
+  }
+  32% {
+    opacity: 1;
+    transform: translate(-50%, 0) scale(1);
+  }
+  72% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: translate(-50%, -28px) scale(0.9);
   }
 }
 
