@@ -556,6 +556,10 @@ a {
   opacity: 0;
   transform-box: fill-box;
   transform-origin: center;
+  animation-duration: 680ms;
+  animation-timing-function: var(--ease);
+  animation-delay: var(--arrival-delay);
+  animation-fill-mode: both;
 }
 
 .hero-logo__arrival-glow {
@@ -569,12 +573,12 @@ a {
   stroke-width: 4;
 }
 
-.hero-visual.is-arriving .hero-logo__arrival-glow {
-  animation: arrival-halo 680ms var(--ease);
+.hero-logo__arrival-glow {
+  animation-name: arrival-halo;
 }
 
-.hero-visual.is-arriving .hero-logo__arrival-ring {
-  animation: arrival-ring 680ms var(--ease);
+.hero-logo__arrival-ring {
+  animation-name: arrival-ring;
 }
 
 .hero-logo__trail,
@@ -595,33 +599,76 @@ a {
   fill: var(--ink);
 }
 
-.hero-visual__topline {
+.hero-visual__journey {
   position: absolute;
   z-index: 3;
   top: 5.5%;
   left: 5.5%;
   right: 5.5%;
-  display: flex;
+  display: grid;
+  grid-template-columns: auto minmax(42px, 1fr) auto;
   align-items: center;
-  justify-content: space-between;
-  gap: 14px;
-}
-
-.hero-visual__label {
-  padding: 7px 11px;
-  color: var(--surface);
-  border: 1px solid var(--ink);
-  background: var(--ink);
-  font-size: 0.75rem;
-  font-weight: 750;
-  letter-spacing: 0.06em;
+  gap: 12px;
+  color: var(--ink);
+  font-size: 0.7rem;
+  font-weight: 800;
+  letter-spacing: 0.07em;
+  line-height: 1.1;
   text-transform: uppercase;
 }
 
-.hero-visual__label--end {
-  color: var(--ink);
-  border-color: var(--lime);
+.hero-visual__journey > span:first-child,
+.hero-visual__journey strong {
+  white-space: nowrap;
+}
+
+.hero-visual__journey strong {
+  position: relative;
+  z-index: 1;
+  font: inherit;
+}
+
+.hero-visual__journey strong::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  right: -3px;
+  bottom: -2px;
+  left: -3px;
+  height: 0.52em;
   background: var(--lime);
+}
+
+.hero-visual__journey-line {
+  position: relative;
+  height: 1px;
+  background: var(--line-strong);
+}
+
+.hero-visual__journey-line::before,
+.hero-visual__journey-line::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.hero-visual__journey-line::before {
+  left: 0;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--ink);
+}
+
+.hero-visual__journey-line::after {
+  right: 0;
+  width: 8px;
+  height: 8px;
+  border: 1px solid var(--ink);
+  color: var(--ink);
+  background: var(--lime);
+  transform: translateY(-50%) rotate(45deg);
 }
 
 .hero-visual__hint {

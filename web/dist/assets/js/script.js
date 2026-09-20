@@ -176,10 +176,9 @@
 
   const memberEntry = document.querySelector("[data-member-entry]");
   const memberLayer = memberEntry?.querySelector("[data-member-layer]");
-  if (memberEntry && memberLayer) {
+  const arrivalLayer = memberEntry?.querySelector("[data-arrival-layer]");
+  if (memberEntry && memberLayer && arrivalLayer) {
     const svgNamespace = "http://www.w3.org/2000/svg";
-    let arrivalStartTimer = 0;
-    let arrivalEndTimer = 0;
 
     const createSvgElement = (name, attributes = {}) => {
       const element = document.createElementNS(svgNamespace, name);
@@ -242,18 +241,24 @@
       });
 
       memberLayer.appendChild(trail);
-      window.clearTimeout(arrivalStartTimer);
-      window.clearTimeout(arrivalEndTimer);
-      memberEntry.classList.remove("is-arriving");
-      arrivalStartTimer = window.setTimeout(() => {
-        void memberEntry.offsetWidth;
-        memberEntry.classList.add("is-arriving");
-      }, 840);
-      arrivalEndTimer = window.setTimeout(
-        () => memberEntry.classList.remove("is-arriving"),
-        1540,
-      );
+      const arrivalSignal = createSvgElement("g", {
+        class: "hero-logo__arrival-signal",
+        style: "--arrival-delay: 840ms",
+      });
+      const doorOutline = "674,331 794,393 794,577 674,634";
+      const arrivalGlow = createSvgElement("polygon", {
+        class: "hero-logo__arrival-glow",
+        points: doorOutline,
+      });
+      const arrivalRing = createSvgElement("polygon", {
+        class: "hero-logo__arrival-ring",
+        points: doorOutline,
+      });
+
+      arrivalSignal.append(arrivalGlow, arrivalRing);
+      arrivalLayer.appendChild(arrivalSignal);
       window.setTimeout(() => trail.remove(), 1900);
+      window.setTimeout(() => arrivalSignal.remove(), 1700);
     });
   }
 
