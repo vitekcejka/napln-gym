@@ -178,7 +178,6 @@
   const memberLayer = memberEntry?.querySelector("[data-member-layer]");
   if (memberEntry && memberLayer) {
     const svgNamespace = "http://www.w3.org/2000/svg";
-    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
 
     const createSvgElement = (name, attributes = {}) => {
       const element = document.createElementNS(svgNamespace, name);
@@ -204,80 +203,74 @@
       };
     };
 
-    const memberPosition = (progress) => {
+    const routePosition = (progress) => {
       if (progress <= 0.78) {
         return cubicPoint(
-          { x: 310, y: 758 },
-          { x: 430, y: 758 },
-          { x: 565, y: 700 },
-          { x: 660, y: 605 },
+          { x: 300, y: 828 },
+          { x: 430, y: 828 },
+          { x: 585, y: 770 },
+          { x: 674, y: 642 },
           progress / 0.78,
         );
       }
 
       const doorwayProgress = (progress - 0.78) / 0.22;
       return cubicPoint(
-        { x: 660, y: 605 },
-        { x: 680, y: 580 },
-        { x: 702, y: 540 },
-        { x: 714, y: 500 },
+        { x: 674, y: 642 },
+        { x: 688, y: 615 },
+        { x: 706, y: 570 },
+        { x: 718, y: 530 },
         doorwayProgress,
       );
     };
 
     memberEntry.addEventListener("click", () => {
-      const member = createSvgElement("g", {
-        class: "hero-logo__member",
-        opacity: "1",
+      const trail = createSvgElement("g", {
+        class: "hero-logo__trail",
       });
-      const head = createSvgElement("circle", {
-        class: "hero-logo__member-head",
-        cx: "0",
-        cy: "-18",
-        r: "11",
+      const stops = [0.03, 0.14, 0.25, 0.36, 0.48, 0.6, 0.71, 0.81, 0.91];
+
+      stops.forEach((progress, index) => {
+        const position = routePosition(progress);
+        const nextPosition = routePosition(Math.min(progress + 0.01, 1));
+        const directionX = nextPosition.x - position.x;
+        const directionY = nextPosition.y - position.y;
+        const directionLength = Math.hypot(directionX, directionY) || 1;
+        const side = index % 2 === 0 ? -1 : 1;
+        const lateralOffset = side * (16 - progress * 7);
+        const x = position.x + (-directionY / directionLength) * lateralOffset;
+        const y = position.y + (directionX / directionLength) * lateralOffset;
+        const angle = (Math.atan2(directionY, directionX) * 180) / Math.PI + 90;
+        const perspectiveScale = 1 - progress * 0.44;
+        const footprintPosition = createSvgElement("g", {
+          class: "hero-logo__footprint-position",
+          transform: `translate(${x} ${y}) rotate(${angle}) scale(${perspectiveScale})`,
+        });
+        const footprint = createSvgElement("g", {
+          class: "hero-logo__footprint",
+          style: `--footprint-delay: ${index * 105}ms`,
+        });
+        const heel = createSvgElement("ellipse", {
+          class: "hero-logo__footprint-shape",
+          cx: "0",
+          cy: "2",
+          rx: "6",
+          ry: "11",
+        });
+        const toe = createSvgElement("circle", {
+          class: "hero-logo__footprint-shape",
+          cx: "0",
+          cy: "-9",
+          r: "5.2",
+        });
+
+        footprint.append(heel, toe);
+        footprintPosition.appendChild(footprint);
+        trail.appendChild(footprintPosition);
       });
-      const bodyPath = "M0 -7v31M-15 7 0 0 15 7M-11 44 0 24 11 44";
-      const outline = createSvgElement("path", {
-        class: "hero-logo__member-outline",
-        d: bodyPath,
-      });
-      const body = createSvgElement("path", {
-        class: "hero-logo__member-body",
-        d: bodyPath,
-      });
 
-      member.append(head, outline, body);
-      memberLayer.appendChild(member);
-
-      const duration = reducedMotion.matches ? 420 : 1450;
-      const startedAt = performance.now();
-
-      const animateMember = (timestamp) => {
-        const elapsed = Math.min((timestamp - startedAt) / duration, 1);
-        const eased =
-          elapsed < 0.5
-            ? 4 * elapsed ** 3
-            : 1 - Math.pow(-2 * elapsed + 2, 3) / 2;
-        const position = memberPosition(reducedMotion.matches ? 1 : eased);
-        const step = reducedMotion.matches
-          ? 0
-          : Math.sin(elapsed * Math.PI * 12) * 2.5;
-        const opacity = elapsed > 0.84 ? Math.max(0, (1 - elapsed) / 0.16) : 1;
-
-        member.setAttribute(
-          "transform",
-          `translate(${position.x} ${position.y + step})`,
-        );
-        member.setAttribute("opacity", String(opacity));
-
-        if (elapsed < 1) {
-          window.requestAnimationFrame(animateMember);
-        } else {
-          member.remove();
-        }
-      };
-
-      window.requestAnimationFrame(animateMember);
+      memberLayer.appendChild(trail);
+      window.setTimeout(() => trail.remove(), 1900);
     });
   }
 
