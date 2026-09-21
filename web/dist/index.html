@@ -691,22 +691,54 @@
             </ul>
           </div>
 
-          <div class="booking-frame reveal" data-booking-frame>
-            <div class="booking-placeholder" data-booking-placeholder>
-              <span class="booking-placeholder__number">30</span>
-              <div>
+          <div class="booking-panel reveal">
+            <div class="booking-panel__header">
+              <span>Rezervace úvodního hovoru</span>
+              <strong>30 MIN</strong>
+            </div>
+
+            <div class="booking-frame" data-booking-frame>
+              <div class="booking-placeholder" data-booking-placeholder>
+                <span class="booking-placeholder__label">Co vás čeká</span>
                 <strong>Vyberte si čas, který vám sedí.</strong>
                 <p>
-                  Rezervační kalendář bude na tomto místě dostupný po doplnění
-                  finálního odkazu.
+                  Jakmile připojíme kalendář, uvidíte tady pouze skutečně volné
+                  termíny. Bez čekání na potvrzení e-mailem.
                 </p>
+
+                <ol class="booking-steps">
+                  <li>
+                    <span>01</span>
+                    <strong>Termín</strong>
+                    <small>Vyberete volný čas.</small>
+                  </li>
+                  <li>
+                    <span>02</span>
+                    <strong>Pár údajů</strong>
+                    <small>Abych věděl, s kým mluvím.</small>
+                  </li>
+                  <li>
+                    <span>03</span>
+                    <strong>Hotovo</strong>
+                    <small>Pozvánka dorazí do e-mailu.</small>
+                  </li>
+                </ol>
+              </div>
+            </div>
+
+            <div class="booking-alternative">
+              <div>
+                <span>Raději nejdřív zpráva?</span>
+                <p>Napište mi krátce o vašem gymu. Odpovím osobně.</p>
               </div>
               <a
-                class="button button--dark booking-placeholder__email"
+                class="button button--dark booking-alternative__button"
                 data-contact-email
+                data-contact-label="Poslat dotaz"
                 hidden
               >
-                Napsat e-mail
+                <span data-contact-label-text>Poslat dotaz</span>
+                <span class="button__arrow" aria-hidden="true">↗</span>
               </a>
             </div>
           </div>

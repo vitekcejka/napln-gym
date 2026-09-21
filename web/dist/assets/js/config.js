@@ -1,6 +1,6 @@
 window.NAPLN_GYM_CONFIG = {
   bookingUrl: "",
-  contactEmail: "",
+  contactEmail: "vitek@naplngym.cz",
   companyId: "",
   companyAddress: "",
   founderPhoto: "",

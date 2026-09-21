@@ -146,10 +146,21 @@
     document
       .querySelectorAll("[data-contact-email], [data-footer-email]")
       .forEach((link) => {
-        link.href = `mailto:${config.contactEmail}`;
-        link.textContent = link.hasAttribute("data-footer-email")
-          ? config.contactEmail
-          : "Napsat e-mail";
+        const isFooterEmail = link.hasAttribute("data-footer-email");
+        const subject = encodeURIComponent("Dotaz k Naplň Gym");
+        link.href = isFooterEmail
+          ? `mailto:${config.contactEmail}`
+          : `mailto:${config.contactEmail}?subject=${subject}`;
+        if (isFooterEmail) {
+          link.textContent = config.contactEmail;
+        } else {
+          const label = link.querySelector("[data-contact-label-text]");
+          if (label) {
+            label.textContent = link.dataset.contactLabel || "Napsat e-mail";
+          } else {
+            link.textContent = link.dataset.contactLabel || "Napsat e-mail";
+          }
+        }
         link.hidden = false;
       });
   }
