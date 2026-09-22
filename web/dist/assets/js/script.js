@@ -9,6 +9,13 @@
   const mobileMenu = document.querySelector("[data-mobile-menu]");
   const config = window.NAPLN_GYM_CONFIG || {};
 
+  if (window.location.hash.length > 1) {
+    const linkedSection = document.getElementById(
+      decodeURIComponent(window.location.hash.slice(1)),
+    );
+    linkedSection?.scrollIntoView({ behavior: "auto", block: "start" });
+  }
+
   const closeMenu = () => {
     if (!toggle || !mobileMenu) return;
     toggle.setAttribute("aria-expanded", "false");
@@ -123,20 +130,216 @@
   updateProgress();
 
   const bookingFrame = document.querySelector("[data-booking-frame]");
-  const placeholder = document.querySelector("[data-booking-placeholder]");
-  if (
-    bookingFrame &&
-    typeof config.bookingUrl === "string" &&
-    /^https:\/\//i.test(config.bookingUrl)
-  ) {
-    const iframe = document.createElement("iframe");
-    iframe.src = config.bookingUrl;
-    iframe.title = "Rezervace schůzky s Naplň Gym";
-    iframe.loading = "lazy";
-    iframe.referrerPolicy = "strict-origin-when-cross-origin";
-    iframe.allow = "payment";
-    placeholder?.remove();
-    bookingFrame.appendChild(iframe);
+  const bookingPlaceholder = document.querySelector(
+    "[data-booking-placeholder]",
+  );
+  const bookingExternal = document.querySelector("[data-booking-external]");
+  if (bookingExternal && /^https:\/\//i.test(config.bookingUrl || "")) {
+    bookingExternal.href = config.bookingUrl;
+    bookingExternal.hidden = false;
+  }
+  let bookingLoaded = false;
+
+  const loadBooking = () => {
+    if (
+      bookingLoaded ||
+      !bookingFrame ||
+      typeof config.bookingUrl !== "string" ||
+      !/^https:\/\//i.test(config.bookingUrl)
+    )
+      return;
+
+    bookingLoaded = true;
+
+    const showBookingFallback = () => {
+      if (!bookingPlaceholder) return;
+      bookingPlaceholder.classList.add("is-error");
+      bookingPlaceholder.innerHTML = `
+        <strong>Kalendář se nepodařilo načíst.</strong>
+        <span>Zkuste to prosím znovu nebo otevřete rezervaci přímo.</span>
+        <a href="${config.bookingUrl}" target="_blank" rel="noopener noreferrer">
+          Otevřít volné termíny ↗
+        </a>
+      `;
+    };
+
+    let calLink = "";
+    try {
+      calLink = new URL(config.bookingUrl).pathname.replace(/^\/+|\/+$/g, "");
+    } catch (error) {
+      console.error("Invalid Cal.com booking URL", error);
+      showBookingFallback();
+      return;
+    }
+
+    const embedTarget = document.createElement("div");
+    embedTarget.id = "napln-gym-cal-embed";
+    embedTarget.className = "booking-embed";
+    bookingFrame.appendChild(embedTarget);
+
+    const markReady = () => bookingPlaceholder?.remove();
+    const iframeObserver = new MutationObserver(() => {
+      const iframe = embedTarget.querySelector("iframe");
+      if (!iframe) return;
+      iframe.title = "Rezervace úvodního hovoru s Naplň Gym";
+      iframe.addEventListener("load", markReady, { once: true });
+      markReady();
+      iframeObserver.disconnect();
+    });
+    iframeObserver.observe(embedTarget, { childList: true, subtree: true });
+
+    ((C, A, L) => {
+      const push = (api, args) => api.q.push(args);
+      const documentRef = C.document;
+      C.Cal =
+        C.Cal ||
+        function () {
+          const cal = C.Cal;
+          const args = arguments;
+          if (!cal.loaded) {
+            cal.ns = {};
+            cal.q = cal.q || [];
+            const script = documentRef.createElement("script");
+            script.src = A;
+            script.async = true;
+            script.addEventListener("error", showBookingFallback);
+            documentRef.head.appendChild(script);
+            cal.loaded = true;
+          }
+          if (args[0] === L) {
+            const api = function () {
+              push(api, arguments);
+            };
+            const namespace = args[1];
+            api.q = api.q || [];
+            if (typeof namespace === "string") {
+              cal.ns[namespace] = cal.ns[namespace] || api;
+              push(cal.ns[namespace], args);
+              push(cal, ["initNamespace", namespace]);
+            } else {
+              push(cal, args);
+            }
+            return;
+          }
+          push(cal, args);
+        };
+    })(window, "https://app.cal.com/embed/embed.js", "init");
+
+    window.Cal("init", "naplnGym", { origin: "https://cal.com" });
+    const cal = window.Cal.ns.naplnGym;
+    cal("on", { action: "linkReady", callback: markReady });
+    cal("on", { action: "bookerReady", callback: markReady });
+    cal("on", { action: "linkFailed", callback: showBookingFallback });
+    cal("inline", {
+      elementOrSelector: "#napln-gym-cal-embed",
+      calLink,
+      config: {
+        layout: "month_view",
+        theme: "light",
+      },
+    });
+    cal("ui", {
+      theme: "light",
+      hideEventTypeDetails: true,
+      showTimezoneWhenEventDetailsHidden: true,
+      layout: "month_view",
+      styles: {
+        branding: { brandColor: "#c7ff2e" },
+      },
+    });
+  };
+
+  const bookingTabs = [...document.querySelectorAll("[data-booking-tab]")];
+  const bookingPanels = [
+    ...document.querySelectorAll("[data-booking-panel]"),
+  ];
+
+  const activateBookingTab = (name, moveFocus = false) => {
+    bookingTabs.forEach((tab) => {
+      const active = tab.dataset.bookingTab === name;
+      tab.classList.toggle("is-active", active);
+      tab.setAttribute("aria-selected", String(active));
+      tab.tabIndex = active ? 0 : -1;
+      if (active && moveFocus) tab.focus();
+    });
+    bookingPanels.forEach((panel) => {
+      panel.hidden = panel.dataset.bookingPanel !== name;
+    });
+    if (name === "calendar") loadBooking();
+  };
+
+  bookingTabs.forEach((tab, index) => {
+    tab.addEventListener("click", () =>
+      activateBookingTab(tab.dataset.bookingTab),
+    );
+    tab.addEventListener("keydown", (event) => {
+      if (event.key !== "ArrowLeft" && event.key !== "ArrowRight") return;
+      event.preventDefault();
+      const direction = event.key === "ArrowRight" ? 1 : -1;
+      const nextIndex =
+        (index + direction + bookingTabs.length) % bookingTabs.length;
+      activateBookingTab(bookingTabs[nextIndex].dataset.bookingTab, true);
+    });
+  });
+
+  const contactForm = document.querySelector("[data-contact-form]");
+  const formStatus = document.querySelector("[data-form-status]");
+  const submitButton = contactForm?.querySelector("button[type='submit']");
+  const submitLabel = contactForm?.querySelector("[data-submit-label]");
+  const contactEndpointIsValid =
+    typeof config.contactFormEndpoint === "string" &&
+    /^https:\/\//i.test(config.contactFormEndpoint);
+
+  contactForm?.addEventListener("submit", async (event) => {
+    event.preventDefault();
+    if (!contactForm.reportValidity()) return;
+    if (!contactEndpointIsValid) {
+      if (formStatus)
+        formStatus.textContent =
+          "Formulář zatím není připojený. Napište prosím přímo na e-mail níže.";
+      return;
+    }
+
+    const formData = new FormData(contactForm);
+    if (String(formData.get("_honey") || "").trim()) return;
+    submitButton?.setAttribute("disabled", "");
+    submitButton?.setAttribute("aria-busy", "true");
+    if (submitLabel) submitLabel.textContent = "Odesílám…";
+    if (formStatus) {
+      formStatus.textContent = "";
+      formStatus.className = "contact-form__status";
+    }
+
+    try {
+      const response = await fetch(config.contactFormEndpoint, {
+        method: "POST",
+        body: formData,
+        headers: { Accept: "application/json" },
+      });
+      if (!response.ok) throw new Error(`Form response ${response.status}`);
+      contactForm.reset();
+      if (formStatus) {
+        formStatus.textContent =
+          "Díky — zpráva je na cestě. Ozvu se vám co nejdřív osobně.";
+        formStatus.classList.add("is-success");
+      }
+    } catch (error) {
+      if (formStatus) {
+        formStatus.textContent =
+          "Zprávu se nepodařilo odeslat. Zkuste to znovu nebo použijte e-mail níže.";
+        formStatus.classList.add("is-error");
+      }
+      console.error("Contact form submission failed", error);
+    } finally {
+      submitButton?.removeAttribute("disabled");
+      submitButton?.removeAttribute("aria-busy");
+      if (submitLabel) submitLabel.textContent = "Poslat zprávu";
+    }
+  });
+
+  if (contactForm && contactEndpointIsValid) {
+    contactForm.action = config.contactFormEndpoint;
+    contactForm.method = "post";
   }
 
   const isValidEmail =

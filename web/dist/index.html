@@ -29,9 +29,9 @@
       sizes="1254x1254"
     />
     <link rel="apple-touch-icon" href="assets/favicon-inverted.png" />
-    <link rel="stylesheet" href="assets/css/styles.css" />
-    <script src="assets/js/config.js" defer></script>
-    <script src="assets/js/script.js" defer></script>
+    <link rel="stylesheet" href="assets/css/styles.css?v=20260922-booking" />
+    <script src="assets/js/config.js?v=20260922-booking" defer></script>
+    <script src="assets/js/script.js?v=20260922-booking" defer></script>
   </head>
   <body>
     <a class="skip-link" href="#main">Přeskočit na obsah</a>
@@ -693,52 +693,136 @@
 
           <div class="booking-panel reveal">
             <div class="booking-panel__header">
-              <span>Rezervace úvodního hovoru</span>
-              <strong>30 MIN</strong>
+              <span>Udělejte první krok</span>
+              <strong>Odpovím osobně</strong>
             </div>
 
-            <div class="booking-frame" data-booking-frame>
-              <div class="booking-placeholder" data-booking-placeholder>
-                <span class="booking-placeholder__label">Co vás čeká</span>
-                <strong>Vyberte si čas, který vám sedí.</strong>
-                <p>
-                  Jakmile připojíme kalendář, uvidíte tady pouze skutečně volné
-                  termíny. Bez čekání na potvrzení e-mailem.
-                </p>
-
-                <ol class="booking-steps">
-                  <li>
-                    <span>01</span>
-                    <strong>Termín</strong>
-                    <small>Vyberete volný čas.</small>
-                  </li>
-                  <li>
-                    <span>02</span>
-                    <strong>Pár údajů</strong>
-                    <small>Abych věděl, s kým mluvím.</small>
-                  </li>
-                  <li>
-                    <span>03</span>
-                    <strong>Hotovo</strong>
-                    <small>Pozvánka dorazí do e-mailu.</small>
-                  </li>
-                </ol>
-              </div>
+            <div class="booking-switcher" role="tablist" aria-label="Způsob kontaktu">
+              <button
+                class="booking-switcher__tab is-active"
+                id="contact-tab"
+                type="button"
+                role="tab"
+                aria-selected="true"
+                aria-controls="contact-panel"
+                data-booking-tab="contact"
+              >
+                <span>01</span>
+                Napsat krátkou zprávu
+              </button>
+              <button
+                class="booking-switcher__tab"
+                id="calendar-tab"
+                type="button"
+                role="tab"
+                aria-selected="false"
+                aria-controls="calendar-panel"
+                tabindex="-1"
+                data-booking-tab="calendar"
+              >
+                <span>02</span>
+                Vybrat 30min termín
+              </button>
             </div>
 
-            <div class="booking-alternative">
-              <div>
-                <span>Raději nejdřív zpráva?</span>
-                <p>Napište mi krátce o vašem gymu. Odpovím osobně.</p>
+            <div
+              class="booking-view booking-view--contact"
+              id="contact-panel"
+              role="tabpanel"
+              aria-labelledby="contact-tab"
+              data-booking-panel="contact"
+            >
+              <div class="booking-view__intro">
+                <span class="booking-view__label">Nejrychlejší varianta</span>
+                <h3>Napište mi, co ve vašem gymu řešíte.</h3>
+                <p>Stačí pár vět. Ozvu se osobně, bez automatického prodejního kolečka.</p>
               </div>
+
+              <form class="contact-form" data-contact-form novalidate>
+                <input type="hidden" name="_subject" value="Nový dotaz z webu Naplň Gym" />
+                <input type="hidden" name="_template" value="table" />
+                <input type="hidden" name="_captcha" value="false" />
+                <label class="contact-form__honeypot" aria-hidden="true">
+                  Nevyplňujte
+                  <input type="text" name="_honey" tabindex="-1" autocomplete="off" />
+                </label>
+
+                <div class="contact-form__row">
+                  <label class="contact-field">
+                    <span>Jméno a příjmení *</span>
+                    <input type="text" name="Jméno" autocomplete="name" required />
+                  </label>
+                  <label class="contact-field">
+                    <span>E-mail *</span>
+                    <input type="email" name="E-mail" autocomplete="email" required />
+                  </label>
+                </div>
+
+                <label class="contact-field">
+                  <span>Název gymu</span>
+                  <input type="text" name="Gym" autocomplete="organization" />
+                </label>
+
+                <label class="contact-field">
+                  <span>Co teď nejvíc řešíte? *</span>
+                  <textarea
+                    name="Zpráva"
+                    rows="4"
+                    placeholder="Například: máme volnou kapacitu, ale nedaří se nám pravidelně získávat nové členy…"
+                    required
+                  ></textarea>
+                </label>
+
+                <label class="contact-consent">
+                  <input type="checkbox" name="Souhlas" value="Ano" required />
+                  <span>
+                    Souhlasím se zpracováním údajů pro vyřízení dotazu podle
+                    <a href="ochrana-osobnich-udaju/">zásad ochrany osobních údajů</a>.
+                  </span>
+                </label>
+
+                <button class="button button--dark contact-form__submit" type="submit">
+                  <span data-submit-label>Poslat zprávu</span>
+                  <span class="button__arrow" aria-hidden="true">↗</span>
+                </button>
+                <p class="contact-form__status" role="status" aria-live="polite" data-form-status></p>
+              </form>
+            </div>
+
+            <div
+              class="booking-view booking-view--calendar"
+              id="calendar-panel"
+              role="tabpanel"
+              aria-labelledby="calendar-tab"
+              data-booking-panel="calendar"
+              hidden
+            >
+              <div class="booking-calendar-intro">
+                <div>
+                  <span class="booking-view__label">30 minut · nezávazně</span>
+                  <h3>Vyberte si termín, který vám sedí.</h3>
+                </div>
+                <p>Pozvánka a odkaz na videohovor dorazí automaticky do e-mailu.</p>
+              </div>
+              <div class="booking-frame" data-booking-frame>
+                <div class="booking-loader" data-booking-placeholder>
+                  <span aria-hidden="true"></span>
+                  Načítám volné termíny…
+                </div>
+              </div>
+              <a class="booking-external" data-booking-external target="_blank" rel="noopener noreferrer" hidden>
+                Kalendář se nezobrazuje? Otevřít termíny zvlášť ↗
+              </a>
+            </div>
+
+            <div class="booking-direct">
+              <span>Nechcete formulář?</span>
               <a
-                class="button button--dark booking-alternative__button"
                 data-contact-email
-                data-contact-label="Poslat dotaz"
+                data-contact-label="Napište přímo na e-mail"
                 hidden
               >
-                <span data-contact-label-text>Poslat dotaz</span>
-                <span class="button__arrow" aria-hidden="true">↗</span>
+                <span data-contact-label-text>Napište přímo na e-mail</span> ↗
               </a>
             </div>
           </div>
